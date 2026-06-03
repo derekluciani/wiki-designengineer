@@ -1,0 +1,18 @@
+Video title: Mariana Castilho - How this designer learned code and became a design engineer
+Date: 09/2024
+Url: https://www.youtube.com/watch?v=pB1d8psayWY&t=2179s
+
+For designers aspiring to transition into design engineering, Mariana Castilho provides a roadmap rooted in her experience at companies like Vercel and Pierre. Here are the key takeaways for building this skill set:
+
+1. Redefining the 'Designer' Mindset
+
+Focus on Implementation: A design engineer doesn't just create static files; they care as much about the final product's production and performance as they do about the visual concept (0:00 - 0:32).
+Think in Code: Start treating Figma (or other design tools) as just one abstraction. When designing, proactively visualize how the UI will be built in code, even involving engineers early in the process to discuss technical feasibility and implementation nuances (9:01 - 10:14).
+2. How to Learn Coding Effectively
+
+Avoid 'Tutorial Hell': Mariana emphasizes that her first attempts to learn to code failed because she tried to master too many concepts (HTML, CSS, JS, React) before building. Success came when she shifted to building first and learning what was necessary to bring those specific projects to life (13:10 - 15:57).
+Leverage AI as a Partner: Use tools like GPT or Cursor not just to copy-paste code, but as a technical partner to explain concepts you don't understand, which helps bridge the knowledge gap faster (16:32 - 17:44).
+3. Practical Tips for Career Growth
+
+Share Work in Public: Building a portfolio of experiments is crucial. Mariana attributes her career trajectory largely to sharing her work on platforms like Twitter and her project UI Labs, which made her visible to industry-leading teams (36:29 - 39:13).
+Focus on Fundamentals: Rather than chasing every new trend, invest time in mastering the basics of typography, spacing, and layout. A deep understanding of these fundamentals will improve the overall quality of your work more effectively than mastering complex technical tools (41:09 - 43:12).

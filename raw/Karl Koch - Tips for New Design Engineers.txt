@@ -1,0 +1,19 @@
+Video title: Karl Koch - Tips for New Design Engineers
+Date: 02/2026
+Url: https://www.youtube.com/watch?v=7_VEb9iDW2c
+
+For designers looking to bridge the gap into design engineering, this video offers several practical strategies for shifting your mindset and leveling up your technical skills:
+
+1. Adopt the "Design Engineer" Mindset (0:45, 31:56)
+Focus on Craft: A design engineer is defined by their willingness to care about the final 10%—the small details, micro-interactions, and nuances that make an experience feel truly delightful, not just functional.
+Generalist Power: With AI acting as a leveler, designers are moving back into generalist territory. You don't need to be a full-stack developer, but you must be curious and logical enough to take ownership of the "front of the front-end."
+2. Strategic Technical Growth (18:04)
+Don't just chase frameworks: Instead of jumping straight into complex frameworks like React without foundation, focus on understanding the core basics—the terminal, HTML, and CSS.
+Curate Knowledge: Rather than trying to learn everything, focus on curating a "toolkit" of patterns, solutions, and resources (like animation techniques or state management patterns) that you can refer back to whenever you need to solve a specific problem.
+3. Smart AI Collaboration (1:32, 16:45)
+Avoid AI Pitfalls: LLMs can be deterministic in a way that isn't always efficient (e.g., overusing useEffect in React). Learn to recognize these common AI mistakes so you can guide the AI to better, more performant solutions.
+Build with Vibes, Ship with Rigor: Use AI to experiment and iterate quickly (vibes), but apply your own design judgment and technical oversight to ensure the final code is efficient and maintainable (rigor).
+Leverage the Browser: Don't always rely on AI to fix visual bugs. Use the browser inspector to debug issues yourself—often a quick CSS tweak (like object-fit: cover) is faster and more accurate than prompting an AI repeatedly.
+4. Focus on Interaction Design (28:36)
+Use Specific Vocabulary: When prompting, use precise technical terms (e.g., "clip-path animation," "cubic-bezier timing," "morphing") to get the behavior you want rather than generic requests.
+Movement with Intent: Motion should serve the user experience. Avoid the "everything is a spring" trap—ensure animations feel purposeful and subtle, especially in professional or data-heavy products.

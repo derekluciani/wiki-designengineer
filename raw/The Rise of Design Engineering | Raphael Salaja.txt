@@ -1,0 +1,26 @@
+Video title: The Rise of Design Engineering | Raphael Salaja | MIT Startup Week
+Date: 02/2026
+Url: https://www.youtube.com/watch?v=uEMEs499fUs&t=672s
+
+Becoming a design engineer involves bridging the gap between design and code, ensuring that the final interface is not just functional, but also polished and human-centric. Based on the talk, here are the key takeaways for anyone interested in this path:
+
+1. Understand the Role and Value
+
+Bridging the Gap: A design engineer acts as an interpreter (2:27) between designers and engineers. You are someone who operates fluently with both code and design, refusing to treat them as separate concerns (2:17).
+Fighting "Slop": In an era of AI-generated content, you add the human element (7:31) and attention to detail that differentiates a "good" product from a "special" one.
+The "Last Mile" Focus: Design engineers often handle the final, polished interactions—animations, transitions, and layout refinements—that are frequently glossed over during the standard development process (3:04, 6:00).
+2. Develop Your "Taste"
+
+Taste is Learnable: You can develop taste by following three simple steps: Study, Note, and Build (14:14).
+Study: Actively inspect and analyze great websites and apps. Understand why their design choices work and how they differ from poor implementations (14:34, 20:47).
+Note: Train your eye to notice micro-interactions, timing, typography, and spacing (19:16). Being able to articulate why something feels "off" is a core skill (19:35).
+Build: Don't just consume; create. Copy the best examples to understand how they work under the hood (20:04, 21:03).
+3. Practical Steps for Transitioning
+
+If you are a Designer: You have the advantage of an "eye" for aesthetics. Focus on the technical side—learn to turn your Figma designs into real code (22:55, 23:13). Use AI tools (like Claude or Cursor) to speed up the process of turning designs into working prototypes (23:06).
+If you are an Engineer: Focus on training your eye for design. Analyze the favorite apps you use, and try to replicate their UI patterns and design systems (24:22).
+4. Balancing Perfectionism and Speed
+
+Prioritization is Key: Understand that you have to ship. Dedicate time for the core functionality, then carve out specific time for refinement and those "delightful" touches (37:53).
+Think Exponentially: Don't overuse animations; ensure they feel necessary and intentional rather than repetitive or distracting (33:01).
+Show Your Work: Build a portfolio that displays your experiments. People respond to the "care" and personal dedication you put into your projects (39:26, 40:09).

@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Web Animation Performance Tier List | Motion Magazine Reference</title>
+    <style>
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --foreground-feint: #737373;
+  --border: #e5e5e5;
+  --layer: #f5f5f5;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --primary: #2563eb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --foreground-feint: #a3a3a3;
+    --border: #262626;
+    --layer: #171717;
+    --primary: #3b82f6;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem 1.5rem;
+}
+
+/* Article Header */
+.mag-dossier {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2rem;
+}
+
+.mag-dossier-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--foreground-feint);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mag-dossier-kicker-caret {
+  margin-right: 0.5rem;
+  color: var(--primary);
+}
+
+.mag-dossier-kicker-link {
+  color: var(--foreground-feint);
+  text-decoration: none;
+}
+
+.mag-dossier-kicker-sep {
+  margin: 0 0.5rem;
+}
+
+.mag-dossier-title {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.mag-dossier-desc {
+  font-size: 1.2rem;
+  color: var(--foreground-feint);
+  margin: 0 0 1.5rem 0;
+  line-height: 1.5;
+}
+
+.mag-dossier-byline {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--foreground-feint);
+}
+
+.mag-byline-author {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mag-byline-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: var(--layer);
+}
+
+.mag-byline-author a {
+  color: var(--foreground);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.mag-byline-author a:hover {
+  text-decoration: underline;
+}
+
+.mag-byline-date {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.mag-byline-date::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--border);
+}
+
+/* Article Body Content Styling */
+p {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.05rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+  margin: 3rem 0 1rem 0;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 1.35rem;
+  margin: 2rem 0 0.75rem 0;
+  font-weight: 650;
+}
+
+h4 {
+  font-size: 1.15rem;
+  margin: 1.5rem 0 0.5rem 0;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1rem;
+  margin: 1.25rem 0 0.5rem 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--foreground-feint);
+}
+
+ol, ul {
+  margin: 0 0 1.5rem 0;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  font-size: 1.05rem;
+}
+
+li p {
+  margin-bottom: 0.5rem;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Images & SVGs */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 2rem 0;
+  display: block;
+}
+
+/* Render Pipeline SVGs */
+.rpd {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 2rem 0;
+  height: auto;
+  font-family: var(--font-mono);
+  border: 1px solid var(--border);
+  background: var(--background);
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.rpd-grid line {
+  stroke: var(--foreground);
+  stroke-opacity: 0.06;
+  stroke-width: 0.5;
+}
+
+.rpd-style-rect {
+  fill: var(--layer);
+  stroke: var(--foreground-feint);
+  stroke-width: 1;
+}
+
+.rpd-style-box text, .rpd-stage-label, .rpd-thrash-read-label {
+  fill: var(--foreground);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.rpd-stage-box {
+  fill: transparent;
+  stroke-width: 1;
+}
+
+.rpd-stage[data-stage=style] .rpd-stage-box {
+  stroke: var(--foreground-feint);
+}
+
+.rpd-connector {
+  stroke: var(--foreground-feint);
+  stroke-width: 1;
+  fill: none;
+}
+
+.rpd-connector--dashed {
+  stroke-dasharray: 3 4;
+}
+
+.rpd-connector--solid {
+  stroke-dasharray: none;
+}
+
+.rpd-arrowhead {
+  fill: var(--foreground-feint);
+}
+
+.rpd-caption line {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.rpd-caption text {
+  fill: var(--foreground-feint);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.rpd-thread-box {
+  fill: none;
+  stroke: var(--foreground-feint);
+  stroke-width: 1.25;
+  stroke-dasharray: 3 3;
+}
+
+.rpd-thread-label {
+  fill: var(--foreground-feint);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.rpd-thrash-line {
+  stroke: #f43f5e;
+  stroke-width: 1.25;
+  fill: none;
+}
+
+.rpd-thrash-read {
+  fill: var(--layer);
+  stroke: #f43f5e;
+  stroke-width: 1;
+}
+
+.rpd-bench-kicker {
+  fill: var(--foreground-feint);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.rpd-bench-row-label {
+  fill: var(--foreground-feint);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.rpd-bench-bar--baseline {
+  fill: var(--layer);
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.rpd-bench-bar--faster {
+  stroke-width: 1;
+}
+
+.rpd-bench-speedup {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Tier Headings (styled like cards but simple) */
+.mag-tier-heading {
+  --tier-color: var(--foreground);
+  display: block;
+  width: 100%;
+  margin: 3.5rem 0 1.5rem 0;
+  box-sizing: border-box;
+}
+
+.mag-tier-heading[data-tier=S] { --tier-color: #fbbf24; }
+.mag-tier-heading[data-tier=A] { --tier-color: #34d399; }
+.mag-tier-heading[data-tier=B] { --tier-color: #60a5fa; }
+.mag-tier-heading[data-tier=C] { --tier-color: #a78bfa; }
+.mag-tier-heading[data-tier=D] { --tier-color: #e879f9; }
+.mag-tier-heading[data-tier=F] { --tier-color: #f43f5e; }
+
+.mag-tier-heading-inner {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  border: 1px solid var(--tier-color);
+  background: color-mix(in srgb, var(--tier-color) 6%, transparent);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.mag-tier-heading-badge {
+  background: var(--tier-color);
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 80px;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.mag-tier-heading-letter {
+  display: block;
+  opacity: 1 !important;
+}
+
+.mag-tier-heading-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 1rem 1rem 1rem 0;
+}
+
+.mag-tier-heading-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--foreground-feint);
+}
+
+.mag-tier-heading-kicker-caret {
+  color: var(--tier-color);
+  margin-right: 0.25rem;
+}
+
+.mag-tier-heading-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+  padding: 0;
+}
+
+.mag-tier-heading-stage {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--tier-color);
+  margin: 0;
+}
+
+/* Code block styles */
+pre {
+  background-color: var(--layer);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  margin: 1.5rem 0;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  background-color: var(--layer);
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+.cb-keyword { color: #f43f5e; font-weight: bold; }
+.cb-string { color: #10b981; }
+.cb-number { color: #3b82f6; }
+.cb-comment { color: var(--foreground-feint); font-style: italic; }
+.cb-function { color: #8b5cf6; }
+.cb-tag { color: #ec4899; }
+.cb-attr { color: #f59e0b; }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+<article class="docs docs--magazine docs--hoisted-header"><header class="mag-dossier"><div class="mag-dossier-inner"><div class="mag-dossier-kicker"><span class="mag-dossier-kicker-caret">&gt;</span><a class="mag-dossier-kicker-link" href="/magazine" data-discover="true">Magazine</a><span class="mag-dossier-kicker-sep">/</span><span>Feature</span></div><h1 class="mag-dossier-title">The Web Animation Performance Tier List</h1><p class="mag-dossier-desc">Learn what makes web animations fast, slow, and everything in between with our 2025 web animation performance tier list.</p><div class="mag-dossier-byline"><span class="mag-byline-author"><img src="assets/ulZPf8sPx65JUasbGmCjltf6uEU.png" alt="" class="mag-byline-avatar" loading="lazy" decoding="async"/><a href="https://motion.dev/@matt" target="_blank" rel="noreferrer">Matt Perry</a></span><span class="mag-byline-date">November 5, 2025</span></div></div></header><div class="docs-article-layout mag-layout"><div class="docs-content mag-content"><p>Animation performance is one of the topics I&#x27;m asked about the most. It makes sense - the whole reason we make animated UIs is so they feel smooth and responsive. If these animations don&#x27;t perform well, they become actively harmful to the overall experience.</p>
+<p>But performance can often feel like a dark art. It&#x27;s a broad topic, extremely nuanced, and full of trade-offs.</p>
+<p>In this article, I&#x27;m sharing everything I know about animation performance on the web. We&#x27;ll cover it all - when to use <code>will-change</code> (and when to not), why CSS variables are bad actually, what hardware acceleration means - everything.</p>
+<p>Yes, we&#x27;re going to go into the technical details, and talk about these nuances and trade-offs. At the same time, we&#x27;re going to categorise everything into an <strong>animation performance tier list</strong>, so you can easily remember which techniques to prefer, which to use with care, and which to avoid completely.</p>
+<h2 id="the-render-pipeline">The render pipeline</h2>
+<p>Before we can get to ranking, we need to understand a little about the browser&#x27;s <strong>render pipeline</strong>.</p>
+<p>This is the process by which a browser takes all the HTML, CSS, fonts and images, and then turns them into the final image that you see on your screen.</p>
+<p>Every browser is different in the specifics, but they all follow the same broad steps. First, it has to <strong>calculate the styles</strong> that will apply to each element.</p>
+<p>Once it knows that, there are three render steps that run in the following order:</p>
+<ol>
+<li>
+<p><strong>Layout:</strong> Calculate the geometry of all the elements. Where are they? How big are they? The answers are determined by rules like <code>width</code>, <code>position</code>, <code>display</code> etc.</p>
+</li>
+<li>
+<p><strong>Paint:</strong> Decide which elements should be grouped into layers and draw their pixels. Changing values like <code>background-color</code> and <code>color</code> will trigger paint.</p>
+</li>
+<li>
+<p><strong>Composite:</strong> Take these separate images and merge them together. We can manipulate composited layers without triggering paint using values like <code>transform</code> and <code>filter</code>.<strong> </strong></p>
+</li>
+</ol>
+<p>The important thing to know is that <strong>triggering one step triggers every subsequent step. </strong>In other words, if you trigger layout, you also need to paint and composite. Whereas if you trigger composite, you don&#x27;t need to re-run the other steps.</p>
+<svg class="rpd" viewBox="0 0 660 308" role="img" aria-label="Render pipeline: style triggers branch into three paths — composite only, paint then composite, or layout then paint then composite."><defs><marker id="rpd-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 L11 6 L1 11 Z" class="rpd-arrowhead"></path></marker><marker id="rpd-arrow-f" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 L11 6 L1 11 Z" fill="#f43f5e"></path></marker></defs><g class="rpd-grid" aria-hidden="true"><line x1="0" y1="0" x2="0" y2="308"></line><line x1="16" y1="0" x2="16" y2="308"></line><line x1="32" y1="0" x2="32" y2="308"></line><line x1="48" y1="0" x2="48" y2="308"></line><line x1="64" y1="0" x2="64" y2="308"></line><line x1="80" y1="0" x2="80" y2="308"></line><line x1="96" y1="0" x2="96" y2="308"></line><line x1="112" y1="0" x2="112" y2="308"></line><line x1="128" y1="0" x2="128" y2="308"></line><line x1="144" y1="0" x2="144" y2="308"></line><line x1="160" y1="0" x2="160" y2="308"></line><line x1="176" y1="0" x2="176" y2="308"></line><line x1="192" y1="0" x2="192" y2="308"></line><line x1="208" y1="0" x2="208" y2="308"></line><line x1="224" y1="0" x2="224" y2="308"></line><line x1="240" y1="0" x2="240" y2="308"></line><line x1="256" y1="0" x2="256" y2="308"></line><line x1="272" y1="0" x2="272" y2="308"></line><line x1="288" y1="0" x2="288" y2="308"></line><line x1="304" y1="0" x2="304" y2="308"></line><line x1="320" y1="0" x2="320" y2="308"></line><line x1="336" y1="0" x2="336" y2="308"></line><line x1="352" y1="0" x2="352" y2="308"></line><line x1="368" y1="0" x2="368" y2="308"></line><line x1="384" y1="0" x2="384" y2="308"></line><line x1="400" y1="0" x2="400" y2="308"></line><line x1="416" y1="0" x2="416" y2="308"></line><line x1="432" y1="0" x2="432" y2="308"></line><line x1="448" y1="0" x2="448" y2="308"></line><line x1="464" y1="0" x2="464" y2="308"></line><line x1="480" y1="0" x2="480" y2="308"></line><line x1="496" y1="0" x2="496" y2="308"></line><line x1="512" y1="0" x2="512" y2="308"></line><line x1="528" y1="0" x2="528" y2="308"></line><line x1="544" y1="0" x2="544" y2="308"></line><line x1="560" y1="0" x2="560" y2="308"></line><line x1="576" y1="0" x2="576" y2="308"></line><line x1="592" y1="0" x2="592" y2="308"></line><line x1="608" y1="0" x2="608" y2="308"></line><line x1="624" y1="0" x2="624" y2="308"></line><line x1="640" y1="0" x2="640" y2="308"></line><line x1="656" y1="0" x2="656" y2="308"></line><line x1="0" y1="0" x2="660" y2="0"></line><line x1="0" y1="16" x2="660" y2="16"></line><line x1="0" y1="32" x2="660" y2="32"></line><line x1="0" y1="48" x2="660" y2="48"></line><line x1="0" y1="64" x2="660" y2="64"></line><line x1="0" y1="80" x2="660" y2="80"></line><line x1="0" y1="96" x2="660" y2="96"></line><line x1="0" y1="112" x2="660" y2="112"></line><line x1="0" y1="128" x2="660" y2="128"></line><line x1="0" y1="144" x2="660" y2="144"></line><line x1="0" y1="160" x2="660" y2="160"></line><line x1="0" y1="176" x2="660" y2="176"></line><line x1="0" y1="192" x2="660" y2="192"></line><line x1="0" y1="208" x2="660" y2="208"></line><line x1="0" y1="224" x2="660" y2="224"></line><line x1="0" y1="240" x2="660" y2="240"></line><line x1="0" y1="256" x2="660" y2="256"></line><line x1="0" y1="272" x2="660" y2="272"></line><line x1="0" y1="288" x2="660" y2="288"></line><line x1="0" y1="304" x2="660" y2="304"></line></g><g class="rpd-style-box" data-stage="style" style="opacity:1"><rect class="rpd-style-rect" x="16" y="43" width="96" height="192" rx="0"></rect><text x="64" y="143" text-anchor="middle">STYLE</text></g><line class="rpd-connector rpd-connector--dashed" x1="112" y1="139" x2="140" y2="139" style="opacity:1"></line><line class="rpd-connector rpd-connector--dashed" x1="140" y1="45" x2="140" y2="139" style="opacity:1"></line><line class="rpd-connector rpd-connector--dashed" x1="140" y1="139" x2="140" y2="233" style="opacity:1"></line><g class="rpd-row" data-tier="S"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="45" x2="502" y2="45" marker-end="url(#rpd-arrow)" style="opacity:1"></line><g class="rpd-stage" data-stage="composite" style="opacity:1"><rect class="rpd-stage-box" x="510" y="28" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="49" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-row" data-tier="C"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="139" x2="362" y2="139" marker-end="url(#rpd-arrow)" style="opacity:1"></line><g class="rpd-stage" data-stage="paint" style="opacity:1"><rect class="rpd-stage-box" x="370" y="122" width="110" height="34" rx="0" stroke="#a78bfa"></rect><text class="rpd-stage-label" x="425" y="143" text-anchor="middle">PAINT</text></g><g class="rpd-stage" data-stage="composite" style="opacity:1"><line class="rpd-connector rpd-connector--solid" x1="480" y1="139" x2="502" y2="139" marker-end="url(#rpd-arrow)" style="opacity:1"></line><rect class="rpd-stage-box" x="510" y="122" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="143" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-row" data-tier="D"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="233" x2="222" y2="233" marker-end="url(#rpd-arrow)" style="opacity:1"></line><g class="rpd-stage" data-stage="layout" style="opacity:1"><rect class="rpd-stage-box" x="230" y="216" width="110" height="34" rx="0" stroke="#e879f9"></rect><text class="rpd-stage-label" x="285" y="237" text-anchor="middle">LAYOUT</text></g><g class="rpd-stage" data-stage="paint" style="opacity:1"><line class="rpd-connector rpd-connector--solid" x1="340" y1="233" x2="362" y2="233" marker-end="url(#rpd-arrow)" style="opacity:1"></line><rect class="rpd-stage-box" x="370" y="216" width="110" height="34" rx="0" stroke="#a78bfa"></rect><text class="rpd-stage-label" x="425" y="237" text-anchor="middle">PAINT</text></g><g class="rpd-stage" data-stage="composite" style="opacity:1"><line class="rpd-connector rpd-connector--solid" x1="480" y1="233" x2="502" y2="233" marker-end="url(#rpd-arrow)" style="opacity:1"></line><rect class="rpd-stage-box" x="510" y="216" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="237" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-caption" aria-hidden="true"><line x1="0" y1="280" x2="660" y2="280"></line><text x="16" y="298">&gt; RENDER PIPELINE</text><text x="644" y="298" text-anchor="end">FIG.<!-- -->01</text></g></svg>
+<p>The exact cost (in terms of time) of running each step is completely situational, and profiling this could (should?) be a post of its own. But triggering, for example paint, is <strong>always more expensive</strong> than triggering composite, because if you paint you also always need to composite.</p>
+<h3 id="threads">Threads</h3>
+<p>Additionally, you need to know that most of these steps happen <strong>synchronously</strong>, one after the other, on the &quot;main thread&quot;. This is a CPU process where most of your JavaScript and other browser work happens.</p>
+<p>Therefore, if the main thread is busy, the render pipeline will be blocked from updating the screen, and this manifests as stuttery animations.</p>
+<p>However, there&#x27;s also the &quot;compositor thread&quot;. If changing a style (like <code>transform</code>) only triggers the composite step, then it&#x27;s often possible to run the animation itself on the compositor thread. In this case, if the main thread gets blocked, the animation will remain smooth.</p>
+<svg class="rpd" viewBox="0 0 660 248" role="img" aria-label="Threads: style, layout, and paint run on the main thread; composite runs on the compositor thread."><g class="rpd-grid" aria-hidden="true"><line x1="0" y1="0" x2="0" y2="248"></line><line x1="16" y1="0" x2="16" y2="248"></line><line x1="32" y1="0" x2="32" y2="248"></line><line x1="48" y1="0" x2="48" y2="248"></line><line x1="64" y1="0" x2="64" y2="248"></line><line x1="80" y1="0" x2="80" y2="248"></line><line x1="96" y1="0" x2="96" y2="248"></line><line x1="112" y1="0" x2="112" y2="248"></line><line x1="128" y1="0" x2="128" y2="248"></line><line x1="144" y1="0" x2="144" y2="248"></line><line x1="160" y1="0" x2="160" y2="248"></line><line x1="176" y1="0" x2="176" y2="248"></line><line x1="192" y1="0" x2="192" y2="248"></line><line x1="208" y1="0" x2="208" y2="248"></line><line x1="224" y1="0" x2="224" y2="248"></line><line x1="240" y1="0" x2="240" y2="248"></line><line x1="256" y1="0" x2="256" y2="248"></line><line x1="272" y1="0" x2="272" y2="248"></line><line x1="288" y1="0" x2="288" y2="248"></line><line x1="304" y1="0" x2="304" y2="248"></line><line x1="320" y1="0" x2="320" y2="248"></line><line x1="336" y1="0" x2="336" y2="248"></line><line x1="352" y1="0" x2="352" y2="248"></line><line x1="368" y1="0" x2="368" y2="248"></line><line x1="384" y1="0" x2="384" y2="248"></line><line x1="400" y1="0" x2="400" y2="248"></line><line x1="416" y1="0" x2="416" y2="248"></line><line x1="432" y1="0" x2="432" y2="248"></line><line x1="448" y1="0" x2="448" y2="248"></line><line x1="464" y1="0" x2="464" y2="248"></line><line x1="480" y1="0" x2="480" y2="248"></line><line x1="496" y1="0" x2="496" y2="248"></line><line x1="512" y1="0" x2="512" y2="248"></line><line x1="528" y1="0" x2="528" y2="248"></line><line x1="544" y1="0" x2="544" y2="248"></line><line x1="560" y1="0" x2="560" y2="248"></line><line x1="576" y1="0" x2="576" y2="248"></line><line x1="592" y1="0" x2="592" y2="248"></line><line x1="608" y1="0" x2="608" y2="248"></line><line x1="624" y1="0" x2="624" y2="248"></line><line x1="640" y1="0" x2="640" y2="248"></line><line x1="656" y1="0" x2="656" y2="248"></line><line x1="0" y1="0" x2="660" y2="0"></line><line x1="0" y1="16" x2="660" y2="16"></line><line x1="0" y1="32" x2="660" y2="32"></line><line x1="0" y1="48" x2="660" y2="48"></line><line x1="0" y1="64" x2="660" y2="64"></line><line x1="0" y1="80" x2="660" y2="80"></line><line x1="0" y1="96" x2="660" y2="96"></line><line x1="0" y1="112" x2="660" y2="112"></line><line x1="0" y1="128" x2="660" y2="128"></line><line x1="0" y1="144" x2="660" y2="144"></line><line x1="0" y1="160" x2="660" y2="160"></line><line x1="0" y1="176" x2="660" y2="176"></line><line x1="0" y1="192" x2="660" y2="192"></line><line x1="0" y1="208" x2="660" y2="208"></line><line x1="0" y1="224" x2="660" y2="224"></line><line x1="0" y1="240" x2="660" y2="240"></line></g><g class="rpd-thread"><rect class="rpd-thread-box" x="16" y="20" width="308" height="180" rx="0"></rect><text class="rpd-thread-label" x="170" y="48" text-anchor="middle">MAIN THREAD</text></g><g class="rpd-thread"><rect class="rpd-thread-box" x="336" y="20" width="308" height="180" rx="0"></rect><text class="rpd-thread-label" x="490" y="48" text-anchor="middle">COMPOSITOR THREAD</text></g><g class="rpd-stage" data-stage="style"><rect class="rpd-stage-box" x="54" y="80" width="110" height="34" rx="0"></rect><text class="rpd-stage-label" x="109" y="101" text-anchor="middle">STYLE</text></g><g class="rpd-stage" data-stage="layout"><rect class="rpd-stage-box" x="176" y="80" width="110" height="34" rx="0" stroke="#e879f9"></rect><text class="rpd-stage-label" x="231" y="101" text-anchor="middle">LAYOUT</text></g><g class="rpd-stage" data-stage="paint"><rect class="rpd-stage-box" x="115" y="142" width="110" height="34" rx="0" stroke="#a78bfa"></rect><text class="rpd-stage-label" x="170" y="163" text-anchor="middle">PAINT</text></g><g class="rpd-stage" data-stage="composite"><rect class="rpd-stage-box" x="435" y="93" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="490" y="114" text-anchor="middle">COMPOSITE</text></g><g class="rpd-caption" aria-hidden="true"><line x1="0" y1="220" x2="660" y2="220"></line><text x="16" y="238">&gt; THREADS</text><text x="644" y="238" text-anchor="end">FIG.<!-- -->02</text></g></svg>
+<h3 id="tiers">Tiers</h3>
+<p>Now that we understand how the browser actually works, we can make some basic tiers to rank our animation techniques:</p>
+<ul>
+<li>
+<p><strong>S-Tier:</strong> Animations that can be run entirely on the compositor thread.</p>
+</li>
+<li>
+<p><strong>A-Tier:</strong> Run on the main thread but trigger compositor.</p>
+</li>
+<li>
+<p><strong>B-Tier:</strong> Involve some DOM setup measurements, but then run as A or S-Tier animations.</p>
+</li>
+<li>
+<p><strong>C-Tier:</strong> Trigger paint.</p>
+</li>
+<li>
+<p><strong>D-Tier:</strong> Trigger layout.</p>
+</li>
+<li>
+<p><strong>F-Tier: </strong>You&#x27;ll see!</p>
+</li>
+</ul>
+<p>There&#x27;s a ton of caveats to the above - hence the rest of this post.</p>
+<p>As discussed, the reason we want performant animations is to create smooth and responsive UIs. Therefore, an animation technique that performs well, but for some reason doesn&#x27;t feel responsive? It&#x27;ll get a downgrade.</p>
+<p>We&#x27;ll cover all this, and more. So let&#x27;s get into it!</p>
+
+<aside class="mag-tier-heading" data-tier="S"><div class="mag-tier-heading-inner" ><div class="mag-tier-heading-badge" aria-hidden="true"><span class="mag-tier-heading-letter">S</span></div><div class="mag-tier-heading-text"><span class="mag-tier-heading-kicker"><span class="mag-tier-heading-kicker-caret">&gt;</span> Tier</span><h2 id="s-tier" class="mag-tier-heading-title">S<!-- -->-Tier</h2><p class="mag-tier-heading-stage">Composite-only</p></div></div></aside>
+<p>An S-Tier animation can run <strong>entirely on the compositor thread.</strong> Heavy main thread work won&#x27;t affect an S-Tier animation - it&#x27;ll stay a smooth 60 or 120fps.</p>
+<svg class="rpd" viewBox="0 0 660 308" role="img" aria-label="Render pipeline: style triggers branch into three paths — composite only, paint then composite, or layout then paint then composite."><defs><marker id="rpd-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 L11 6 L1 11 Z" class="rpd-arrowhead"></path></marker><marker id="rpd-arrow-f" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 L11 6 L1 11 Z" fill="#f43f5e"></path></marker></defs><g class="rpd-grid" aria-hidden="true"><line x1="0" y1="0" x2="0" y2="308"></line><line x1="16" y1="0" x2="16" y2="308"></line><line x1="32" y1="0" x2="32" y2="308"></line><line x1="48" y1="0" x2="48" y2="308"></line><line x1="64" y1="0" x2="64" y2="308"></line><line x1="80" y1="0" x2="80" y2="308"></line><line x1="96" y1="0" x2="96" y2="308"></line><line x1="112" y1="0" x2="112" y2="308"></line><line x1="128" y1="0" x2="128" y2="308"></line><line x1="144" y1="0" x2="144" y2="308"></line><line x1="160" y1="0" x2="160" y2="308"></line><line x1="176" y1="0" x2="176" y2="308"></line><line x1="192" y1="0" x2="192" y2="308"></line><line x1="208" y1="0" x2="208" y2="308"></line><line x1="224" y1="0" x2="224" y2="308"></line><line x1="240" y1="0" x2="240" y2="308"></line><line x1="256" y1="0" x2="256" y2="308"></line><line x1="272" y1="0" x2="272" y2="308"></line><line x1="288" y1="0" x2="288" y2="308"></line><line x1="304" y1="0" x2="304" y2="308"></line><line x1="320" y1="0" x2="320" y2="308"></line><line x1="336" y1="0" x2="336" y2="308"></line><line x1="352" y1="0" x2="352" y2="308"></line><line x1="368" y1="0" x2="368" y2="308"></line><line x1="384" y1="0" x2="384" y2="308"></line><line x1="400" y1="0" x2="400" y2="308"></line><line x1="416" y1="0" x2="416" y2="308"></line><line x1="432" y1="0" x2="432" y2="308"></line><line x1="448" y1="0" x2="448" y2="308"></line><line x1="464" y1="0" x2="464" y2="308"></line><line x1="480" y1="0" x2="480" y2="308"></line><line x1="496" y1="0" x2="496" y2="308"></line><line x1="512" y1="0" x2="512" y2="308"></line><line x1="528" y1="0" x2="528" y2="308"></line><line x1="544" y1="0" x2="544" y2="308"></line><line x1="560" y1="0" x2="560" y2="308"></line><line x1="576" y1="0" x2="576" y2="308"></line><line x1="592" y1="0" x2="592" y2="308"></line><line x1="608" y1="0" x2="608" y2="308"></line><line x1="624" y1="0" x2="624" y2="308"></line><line x1="640" y1="0" x2="640" y2="308"></line><line x1="656" y1="0" x2="656" y2="308"></line><line x1="0" y1="0" x2="660" y2="0"></line><line x1="0" y1="16" x2="660" y2="16"></line><line x1="0" y1="32" x2="660" y2="32"></line><line x1="0" y1="48" x2="660" y2="48"></line><line x1="0" y1="64" x2="660" y2="64"></line><line x1="0" y1="80" x2="660" y2="80"></line><line x1="0" y1="96" x2="660" y2="96"></line><line x1="0" y1="112" x2="660" y2="112"></line><line x1="0" y1="128" x2="660" y2="128"></line><line x1="0" y1="144" x2="660" y2="144"></line><line x1="0" y1="160" x2="660" y2="160"></line><line x1="0" y1="176" x2="660" y2="176"></line><line x1="0" y1="192" x2="660" y2="192"></line><line x1="0" y1="208" x2="660" y2="208"></line><line x1="0" y1="224" x2="660" y2="224"></line><line x1="0" y1="240" x2="660" y2="240"></line><line x1="0" y1="256" x2="660" y2="256"></line><line x1="0" y1="272" x2="660" y2="272"></line><line x1="0" y1="288" x2="660" y2="288"></line><line x1="0" y1="304" x2="660" y2="304"></line></g><g class="rpd-style-box" data-stage="style" style="opacity:0.25"><rect class="rpd-style-rect" x="16" y="43" width="96" height="192" rx="0"></rect><text x="64" y="143" text-anchor="middle">STYLE</text></g><line class="rpd-connector rpd-connector--dashed" x1="112" y1="139" x2="140" y2="139" style="opacity:0.25"></line><line class="rpd-connector rpd-connector--dashed" x1="140" y1="45" x2="140" y2="139" style="opacity:0.25"></line><line class="rpd-connector rpd-connector--dashed" x1="140" y1="139" x2="140" y2="233" style="opacity:0.25"></line><g class="rpd-row" data-tier="S"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="45" x2="502" y2="45" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><g class="rpd-stage" data-stage="composite" style="opacity:1"><rect class="rpd-stage-box" x="510" y="28" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="49" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-row" data-tier="C"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="139" x2="362" y2="139" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><g class="rpd-stage" data-stage="paint" style="opacity:0.25"><rect class="rpd-stage-box" x="370" y="122" width="110" height="34" rx="0" stroke="#a78bfa"></rect><text class="rpd-stage-label" x="425" y="143" text-anchor="middle">PAINT</text></g><g class="rpd-stage" data-stage="composite" style="opacity:0.25"><line class="rpd-connector rpd-connector--solid" x1="480" y1="139" x2="502" y2="139" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><rect class="rpd-stage-box" x="510" y="122" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="143" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-row" data-tier="D"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="233" x2="222" y2="233" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><g class="rpd-stage" data-stage="layout" style="opacity:0.25"><rect class="rpd-stage-box" x="230" y="216" width="110" height="34" rx="0" stroke="#e879f9"></rect><text class="rpd-stage-label" x="285" y="237" text-anchor="middle">LAYOUT</text></g><g class="rpd-stage" data-stage="paint" style="opacity:0.25"><line class="rpd-connector rpd-connector--solid" x1="340" y1="233" x2="362" y2="233" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><rect class="rpd-stage-box" x="370" y="216" width="110" height="34" rx="0" stroke="#a78bfa"></rect><text class="rpd-stage-label" x="425" y="237" text-anchor="middle">PAINT</text></g><g class="rpd-stage" data-stage="composite" style="opacity:0.25"><line class="rpd-connector rpd-connector--solid" x1="480" y1="233" x2="502" y2="233" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><rect class="rpd-stage-box" x="510" y="216" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="237" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-caption" aria-hidden="true"><line x1="0" y1="280" x2="660" y2="280"></line><text x="16" y="298">&gt; RENDER PIPELINE</text><text x="644" y="298" text-anchor="end">FIG.<!-- -->03</text></g></svg>
+<h3 id="compositor-styles">Compositor styles</h3>
+<p>The styles generally capable of animating via the compositor are <code>transform</code>, <code>opacity</code>, <code>filter</code>, and <code>clip-path</code>.</p>
+<p>Animating these values with either CSS, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API">Web Animations API</a> (WAAPI), or an animation library that supports WAAPI (like <a href="/">Motion</a>) will ensure your animations remain smooth, even when the main thread is busy.</p>
+<pre><code><span>animate(<span class="cb-string">&quot;.box&quot;</span>, { opacity: 1 })</span></code></pre>
+<p>By contrast, JavaScript libraries based on <code>requestAnimationFrame</code> (like GSAP) can still update these same properties, but the <em>animation itself</em> runs on the main thread. This means the animation is interruptible - usually smooth, but vulnerable to jank whenever the main thread gets blocked.</p>
+<h3 id="avoid-style-recalculations">Avoid style recalculations</h3>
+<p>Another key benefit of hardware-accelerated animations is that an element&#x27;s visuals can update without recalculating styles.</p>
+<p>Remember, this is a main thread process that runs before the browser decides whether it needs to trigger the layout, paint or composite steps.</p>
+<p>The style recalculation itself can be extremely costly, especially in complex DOM structures, or on pages using <a href="https://web.dev/articles/reduce-the-scope-and-complexity-of-style-calculations">slow CSS selectors</a>.</p>
+<h3 id="scroll-animations">Scroll animations</h3>
+<p>When animating one of these compositor values using a <a href="https://developer.mozilla.org/en-US/docs/Web/API/ScrollTimeline">Scroll Timeline</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/view-timeline">View Timeline</a>, whether that&#x27;s via CSS, WAAPI, or Motion&#x27;s <code>scroll()</code> function, these scroll animations will also be hardware accelerated.</p>
+<pre><code><span>scroll(<!-- -->
+</span><span>  animate(element, { opacity: [0, 1] })<!-- -->
+</span><span>)</span></code></pre>
+<p>However, there&#x27;s another, perhaps bigger, reason these animations feel so great: <strong>Scrolling itself runs on the compositor thread.</strong></p>
+<p>Scrolling is arguably the most important interaction for keeping a UI feeling responsive, which is why browsers handle it away from the main thread.</p>
+<p>This means if you&#x27;re running a scroll animation by reading <code>scrollTop</code>, then your animation might appear to update a frame later than scroll, or even at a different framerate entirely. These types of scroll animations are an easy D-Tier.</p>
+<p>In my experience this effect is much more obvious in Safari, and the primary reason it&#x27;s historically been recommended to sync an element position to scroll by using <code>position: sticky</code> or <code>fixed</code> rather than updating a <code>transform</code>.</p>
+<h3 id="de-optimisations">De-optimisations</h3>
+<p>Here&#x27;s the interesting crinkle in hardware accelerated animations: To support them, browsers essentially have to maintain <strong>two separate animation engines</strong>, one for the CPU-bound main thread and one for the GPU compositor thread.</p>
+<p>Here&#x27;s the thing not many people know: The compositor animation engine <strong>doesn&#x27;t have to be spec-complete</strong>. Because, if the user requests a feature that the compositor thread doesn&#x27;t support, the browser can simply run it on the main thread, silently losing its hardware acceleration.</p>
+<p>Safari is the biggest offender here. It doesn&#x27;t (yet) have a dedicated compositor engine, instead re-using macOS&#x27;s Core Animation framework. So if your animation calls for a feature that Core Animation doesn&#x27;t support, like a <code>playbackRate</code> other than <code>1</code>, then the animation is no longer hardware accelerated.</p>
+<p>Likewise, some values might not be supported by the compositor engine. For example, Chrome only added support for <code>%</code>-based <code>translate</code> values <a href="https://developer.chrome.com/blog/hardware-accelerated-animations#percentage_animations">long after</a> adding accelerated animations.</p>
+<h3 id="layer-size">Layer size</h3>
+<p>Another (quite literally) big performance caveat with S-Tier animations is that they <strong>always require the creation of a layer</strong>.</p>
+<p>A layer is an element, or group of elements, painted together. Essentially, an image that the compositor can move, transform and fade independently, before grouping (or <strong>compositing</strong>) them all into one final image.</p>
+<p>These images can become <strong>huge</strong> without you realising it. Desktop GPUs usually handle this well, but on mobile devices it&#x27;s easy to blow out the GPU memory and crash a website.</p>
+<p>A classic offender here is the ticker/marquee animation, where long lists of duplicated items scroll continuously. Each cloned element contributes to a giant layer, often spanning many times the viewport width. This is why the <a href="/docs/react-ticker">Motion+ Ticker</a> uses a<a href="/magazine/building-the-ultimate-ticker"> reprojection renderer</a> to reduce or eliminate cloned elements in order to limit layer size. It&#x27;s a deliberate trade-off, introducing the occasional paint in order to keep GPU memory under control.</p>
+<p>A confounding factor here is <strong>blur</strong>. Yes, <code>filter: blur()</code> is hardware accelerated. But that doesn&#x27;t make it free. The cost of a blur can escalate sharply with every increased pixel of blur radius, and with larger layers. The blur itself then makes the layer even larger, hitting memory further. This is why, long ago, I added a warning flag in <a href="https://framer.link/TVBc9hz">Framer</a> to flag blur values over <code>10px</code>.</p>
+<img src="assets/iFMIh8OKhLT8MCxjY7NXTERopVI.png"   alt="" width="512" height="198" loading="lazy" decoding="async"/>
+<aside class="mag-tier-heading" data-tier="A"><div class="mag-tier-heading-inner" ><div class="mag-tier-heading-badge" aria-hidden="true"><span class="mag-tier-heading-letter">A</span></div><div class="mag-tier-heading-text"><span class="mag-tier-heading-kicker"><span class="mag-tier-heading-kicker-caret">&gt;</span> Tier</span><h2 id="a-tier" class="mag-tier-heading-title">A<!-- -->-Tier</h2><p class="mag-tier-heading-stage">Main-thread composite</p></div></div></aside>
+<p>An A-Tier animation changes <strong>composited values</strong> (like <code>transform</code> or <code>opacity</code>), but it&#x27;s driven from the <strong>main thread</strong>. Changing these values triggers composition alone, which means in ideal circumstances animations will perform excellently, but could be interrupted by other main thread work.</p>
+<svg class="rpd" viewBox="0 0 660 308" role="img" aria-label="Render pipeline: style triggers branch into three paths — composite only, paint then composite, or layout then paint then composite."><defs><marker id="rpd-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 L11 6 L1 11 Z" class="rpd-arrowhead"></path></marker><marker id="rpd-arrow-f" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 L11 6 L1 11 Z" fill="#f43f5e"></path></marker></defs><g class="rpd-grid" aria-hidden="true"><line x1="0" y1="0" x2="0" y2="308"></line><line x1="16" y1="0" x2="16" y2="308"></line><line x1="32" y1="0" x2="32" y2="308"></line><line x1="48" y1="0" x2="48" y2="308"></line><line x1="64" y1="0" x2="64" y2="308"></line><line x1="80" y1="0" x2="80" y2="308"></line><line x1="96" y1="0" x2="96" y2="308"></line><line x1="112" y1="0" x2="112" y2="308"></line><line x1="128" y1="0" x2="128" y2="308"></line><line x1="144" y1="0" x2="144" y2="308"></line><line x1="160" y1="0" x2="160" y2="308"></line><line x1="176" y1="0" x2="176" y2="308"></line><line x1="192" y1="0" x2="192" y2="308"></line><line x1="208" y1="0" x2="208" y2="308"></line><line x1="224" y1="0" x2="224" y2="308"></line><line x1="240" y1="0" x2="240" y2="308"></line><line x1="256" y1="0" x2="256" y2="308"></line><line x1="272" y1="0" x2="272" y2="308"></line><line x1="288" y1="0" x2="288" y2="308"></line><line x1="304" y1="0" x2="304" y2="308"></line><line x1="320" y1="0" x2="320" y2="308"></line><line x1="336" y1="0" x2="336" y2="308"></line><line x1="352" y1="0" x2="352" y2="308"></line><line x1="368" y1="0" x2="368" y2="308"></line><line x1="384" y1="0" x2="384" y2="308"></line><line x1="400" y1="0" x2="400" y2="308"></line><line x1="416" y1="0" x2="416" y2="308"></line><line x1="432" y1="0" x2="432" y2="308"></line><line x1="448" y1="0" x2="448" y2="308"></line><line x1="464" y1="0" x2="464" y2="308"></line><line x1="480" y1="0" x2="480" y2="308"></line><line x1="496" y1="0" x2="496" y2="308"></line><line x1="512" y1="0" x2="512" y2="308"></line><line x1="528" y1="0" x2="528" y2="308"></line><line x1="544" y1="0" x2="544" y2="308"></line><line x1="560" y1="0" x2="560" y2="308"></line><line x1="576" y1="0" x2="576" y2="308"></line><line x1="592" y1="0" x2="592" y2="308"></line><line x1="608" y1="0" x2="608" y2="308"></line><line x1="624" y1="0" x2="624" y2="308"></line><line x1="640" y1="0" x2="640" y2="308"></line><line x1="656" y1="0" x2="656" y2="308"></line><line x1="0" y1="0" x2="660" y2="0"></line><line x1="0" y1="16" x2="660" y2="16"></line><line x1="0" y1="32" x2="660" y2="32"></line><line x1="0" y1="48" x2="660" y2="48"></line><line x1="0" y1="64" x2="660" y2="64"></line><line x1="0" y1="80" x2="660" y2="80"></line><line x1="0" y1="96" x2="660" y2="96"></line><line x1="0" y1="112" x2="660" y2="112"></line><line x1="0" y1="128" x2="660" y2="128"></line><line x1="0" y1="144" x2="660" y2="144"></line><line x1="0" y1="160" x2="660" y2="160"></line><line x1="0" y1="176" x2="660" y2="176"></line><line x1="0" y1="192" x2="660" y2="192"></line><line x1="0" y1="208" x2="660" y2="208"></line><line x1="0" y1="224" x2="660" y2="224"></line><line x1="0" y1="240" x2="660" y2="240"></line><line x1="0" y1="256" x2="660" y2="256"></line><line x1="0" y1="272" x2="660" y2="272"></line><line x1="0" y1="288" x2="660" y2="288"></line><line x1="0" y1="304" x2="660" y2="304"></line></g><g class="rpd-style-box" data-stage="style" style="opacity:1"><rect class="rpd-style-rect" x="16" y="43" width="96" height="192" rx="0"></rect><text x="64" y="143" text-anchor="middle">STYLE</text></g><line class="rpd-connector rpd-connector--dashed" x1="112" y1="139" x2="140" y2="139" style="opacity:1"></line><line class="rpd-connector rpd-connector--dashed" x1="140" y1="45" x2="140" y2="139" style="opacity:1"></line><line class="rpd-connector rpd-connector--dashed" x1="140" y1="139" x2="140" y2="233" style="opacity:0.25"></line><g class="rpd-row" data-tier="S"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="45" x2="502" y2="45" marker-end="url(#rpd-arrow)" style="opacity:1"></line><g class="rpd-stage" data-stage="composite" style="opacity:1"><rect class="rpd-stage-box" x="510" y="28" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="49" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-row" data-tier="C"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="139" x2="362" y2="139" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><g class="rpd-stage" data-stage="paint" style="opacity:0.25"><rect class="rpd-stage-box" x="370" y="122" width="110" height="34" rx="0" stroke="#a78bfa"></rect><text class="rpd-stage-label" x="425" y="143" text-anchor="middle">PAINT</text></g><g class="rpd-stage" data-stage="composite" style="opacity:0.25"><line class="rpd-connector rpd-connector--solid" x1="480" y1="139" x2="502" y2="139" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><rect class="rpd-stage-box" x="510" y="122" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="143" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-row" data-tier="D"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="233" x2="222" y2="233" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><g class="rpd-stage" data-stage="layout" style="opacity:0.25"><rect class="rpd-stage-box" x="230" y="216" width="110" height="34" rx="0" stroke="#e879f9"></rect><text class="rpd-stage-label" x="285" y="237" text-anchor="middle">LAYOUT</text></g><g class="rpd-stage" data-stage="paint" style="opacity:0.25"><line class="rpd-connector rpd-connector--solid" x1="340" y1="233" x2="362" y2="233" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><rect class="rpd-stage-box" x="370" y="216" width="110" height="34" rx="0" stroke="#a78bfa"></rect><text class="rpd-stage-label" x="425" y="237" text-anchor="middle">PAINT</text></g><g class="rpd-stage" data-stage="composite" style="opacity:0.25"><line class="rpd-connector rpd-connector--solid" x1="480" y1="233" x2="502" y2="233" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><rect class="rpd-stage-box" x="510" y="216" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="237" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-caption" aria-hidden="true"><line x1="0" y1="280" x2="660" y2="280"></line><text x="16" y="298">&gt; RENDER PIPELINE</text><text x="644" y="298" text-anchor="end">FIG.<!-- -->04</text></g></svg>
+<h3 id="layers-only">Layers only</h3>
+<p>For a style to trigger composition alone, the element it&#x27;s being set on must first be promoted to a <strong>layer</strong>. If it isn&#x27;t, updating values like <code>transform</code> and <code>opacity</code> will still trigger a paint.</p>
+<p>Ultimately, the browser decides which elements will become a layer. The reasons will vary by browser, and they are numerous and mystical, including:</p>
+<ul>
+<li>
+<p>An associated CSS/WAAPI <code>transform</code> (etc) animation</p>
+</li>
+<li>
+<p>A 3D <code>transform</code></p>
+</li>
+<li>
+<p><code>position: fixed</code> or <code>sticky</code></p>
+</li>
+<li>
+<p><code>backdrop-filter</code></p>
+</li>
+<li>
+<p>Overlapping another layer</p>
+</li>
+</ul>
+<p>You can also hint that an element should become a layer with <code>will-change</code>:</p>
+<pre><code><span>dialog {<!-- -->
+</span><span>  <span class="cb-attr">will-change</span>: transform, opacity;<!-- -->
+</span><span>}</span></code></pre>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/will-change">MDN docs</a> warn (with a massive red box) that <code>will-change</code> should be used sparingly. The core concern is that by creating too many layers or layers that are too big, we can blow out GPU memory budgets.</p>
+<p>This is why Motion doesn&#x27;t just spray <code>will-change</code> across every animating element. Layerisation is a tool that you should know about, and use knowingly.</p>
+<h3 id="javascript-animations">JavaScript animations</h3>
+<p>Once an element is a layer, then changing a composited value via <code>element.style</code> will only trigger composition, skipping paint.</p>
+<pre><code><span>element.style.transform = <span class="cb-string">&quot;translateX(100px)&quot;</span></span></code></pre>
+<p>This is true of all classic JS animation libraries like GSAP, or custom <code>requestAnimationFrame</code> implementations. It&#x27;s also how Motion animates independent transforms:</p>
+<pre><code><span>animate(element, { x: 100 })</span></code></pre>
+<p>There is, of course, additional CPU overhead when running a JS animation (though this is also true of main thread CSS/WAAPI animations). In my experience though, JS runtime is <strong>almost never</strong> the reason for a slow animation, it is almost always a <strong>costly render</strong>.</p>
+<p>In certain cases, like animating <strong>thousands</strong> of small elements, <a href="https://codepen.io/MakiBM/pen/WMXGVK">benchmarks show</a> that <code>requestAnimationFrame</code> or GSAP will outperform hardware-accelerated animations.</p>
+<p>Of course, if you&#x27;re animating thousands of elements its probable you&#x27;re better off using a shader.</p>
+<h3 id="shaders">Shaders</h3>
+<p>A <a href="https://aerotwist.com/tutorials/an-introduction-to-shaders-part-1/">shader</a> is a small WebGL/WebGPU program that decides which colour to paint a pixel. Because they run massively in parallel, they can produce complex effects with incredible performance.</p>
+<p>However, shader updates are still scheduled via <code>requestAnimationFrame</code>, which means timing is controlled by the main thread. That’s why shaders aren’t S-Tier: they can render incredibly fast, but they can still miss frames if the main thread is blocked.</p>
+<h3 id="intersectionobserver"><code>IntersectionObserver</code></h3>
+<p>The <code>IntersectionObserver</code> is the most performant way to detect when an element enters or leaves the viewport. It&#x27;s the secret sauce behind Motion&#x27;s <code>inView</code> function and <code>whileInView</code> prop.</p>
+<p>An observer efficiently tracks element visibility relative to the viewport in a background thread, without any <code>scrollTop</code> reads or other DOM measurements. So it adds minimal work to the main thread.</p>
+<p>Because it&#x27;s so lightweight, it&#x27;s ideal for scroll-triggered animations:</p>
+<pre><code><span><span class="cb-function">inView</span>(element, () <span class="cb-arrow">=&gt;</span> {<!-- -->
+</span><span>  <span class="cb-function">animate</span>(element, { x: -<span class="cb-number">100</span> })<!-- -->
+</span><span>})</span></code></pre>
+<pre><code><span>&lt;<span class="cb-tag">motion.div</span> whileInView={{ opacity: <span class="cb-number">1</span> }} /&gt;</span></code></pre>
+<p>But <code>IntersectionObserver</code> has another, often overlooked superpower: Deactivating off-screen animations.</p>
+<p>Imagine we have a long-running animation that would normally keep playing as long as the page was open:</p>
+<pre><code><span>.in-view {<!-- -->
+</span><span>  <span class="cb-attr">animation</span>: spin <span class="cb-number">2s</span> infinite;<!-- -->
+</span><span>}</span></code></pre>
+<p>By using <code>IntersectionObserver</code>, we can ensure that this animation is only playing when the element itself is within the visible area:</p>
+<pre><code><span><span class="cb-function">inView</span>(element, () <span class="cb-arrow">=&gt;</span> {<!-- -->
+</span><span>  element.classList.<span class="cb-function">add</span>(<span class="cb-string">&quot;in-view&quot;</span>)<!-- -->
+</span><span>  <!-- -->
+</span><span>  <span class="cb-keyword">return</span> () <span class="cb-arrow">=&gt;</span> element.classList.<span class="cb-function">remove</span>(<span class="cb-string">&quot;in-view&quot;</span>)<!-- -->
+</span><span>})</span></code></pre>
+<pre><code><span>.in-view {<!-- -->
+</span><span>  <span class="cb-attr">animation</span>: spin <span class="cb-number">2s</span> infinite;<!-- -->
+</span><span>}</span></code></pre>
+<p>This is the way <a href="/docs/react-ticker">Motion+ Ticker</a> ensures its long-running animations are performant and battery-friendly, by only running them while the ticker is visible.</p>
+<aside class="mag-tier-heading" data-tier="B"><div class="mag-tier-heading-inner" ><div class="mag-tier-heading-badge" aria-hidden="true"><span class="mag-tier-heading-letter">B</span></div><div class="mag-tier-heading-text"><span class="mag-tier-heading-kicker"><span class="mag-tier-heading-kicker-caret">&gt;</span> Tier</span><h2 id="b-tier" class="mag-tier-heading-title">B<!-- -->-Tier</h2><p class="mag-tier-heading-stage">A-Tier + DOM measurement</p></div></div></aside>
+<p>A B-Tier animation is an A or S-Tier animation with an additional upfront cost: DOM measurements.</p>
+<h3 id="layout-animations">Layout animations</h3>
+<p>Motion has a powerful <a href="/docs/react-layout-animations">layout animation engine</a> that allows the animation of an element&#x27;s size and position, <strong>without triggering layout every frame.</strong></p>
+<pre><code><span>&lt;<span class="cb-tag">motion.div</span> layout /&gt;</span></code></pre>
+<p>It achieves this by only animating the <code>transform</code> style. So instead of animating an element between <code>width: 500px</code> and <code>1000px</code>, it can animate an element of <code>width: 1000px</code> between <code>scale(0.5)</code> and <code>1</code>.</p>
+<p>The downside of animating <code>scale</code> vs <code>width</code>/<code>height</code> is it can distort elements. But Motion corrects for this every frame, by calculating inverse transforms and <code>border-radius</code> for an element and its children.</p>
+<p>To achieve all this, it first has to do some setup measurements using what&#x27;s known as the <a href="https://aerotwist.com/blog/flip-your-animations/">FLIP (First, Last, Invert, Play) technique</a>.</p>
+<p>Because of Motion&#x27;s per-frame calculations that allow for scale correction (and a few other benefits), it performs this kind of animation on the main thread (A-Tier). But if we were doing this ourselves, just one element deep, it could easily become an S-Tier hardware accelerated animation.</p>
+<pre><code><span>animate(element, { transform: [delta, <span class="cb-string">&quot;none&quot;</span> ]})</span></code></pre>
+<p>This one upfront measurement takes the most expensive kind of animation and makes it one of the least.</p>
+<aside class="mag-tier-heading" data-tier="C"><div class="mag-tier-heading-inner" ><div class="mag-tier-heading-badge" aria-hidden="true"><span class="mag-tier-heading-letter">C</span></div><div class="mag-tier-heading-text"><span class="mag-tier-heading-kicker"><span class="mag-tier-heading-kicker-caret">&gt;</span> Tier</span><h2 id="c-tier" class="mag-tier-heading-title">C<!-- -->-Tier</h2><p class="mag-tier-heading-stage">Paint-triggering</p></div></div></aside>
+<p>C-Tier animations trigger the <strong>paint</strong> step. This means they force the browser to recalculate styles and then redraw affected layers.</p>
+<svg class="rpd" viewBox="0 0 660 308" role="img" aria-label="Render pipeline: style triggers branch into three paths — composite only, paint then composite, or layout then paint then composite."><defs><marker id="rpd-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 L11 6 L1 11 Z" class="rpd-arrowhead"></path></marker><marker id="rpd-arrow-f" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 L11 6 L1 11 Z" fill="#f43f5e"></path></marker></defs><g class="rpd-grid" aria-hidden="true"><line x1="0" y1="0" x2="0" y2="308"></line><line x1="16" y1="0" x2="16" y2="308"></line><line x1="32" y1="0" x2="32" y2="308"></line><line x1="48" y1="0" x2="48" y2="308"></line><line x1="64" y1="0" x2="64" y2="308"></line><line x1="80" y1="0" x2="80" y2="308"></line><line x1="96" y1="0" x2="96" y2="308"></line><line x1="112" y1="0" x2="112" y2="308"></line><line x1="128" y1="0" x2="128" y2="308"></line><line x1="144" y1="0" x2="144" y2="308"></line><line x1="160" y1="0" x2="160" y2="308"></line><line x1="176" y1="0" x2="176" y2="308"></line><line x1="192" y1="0" x2="192" y2="308"></line><line x1="208" y1="0" x2="208" y2="308"></line><line x1="224" y1="0" x2="224" y2="308"></line><line x1="240" y1="0" x2="240" y2="308"></line><line x1="256" y1="0" x2="256" y2="308"></line><line x1="272" y1="0" x2="272" y2="308"></line><line x1="288" y1="0" x2="288" y2="308"></line><line x1="304" y1="0" x2="304" y2="308"></line><line x1="320" y1="0" x2="320" y2="308"></line><line x1="336" y1="0" x2="336" y2="308"></line><line x1="352" y1="0" x2="352" y2="308"></line><line x1="368" y1="0" x2="368" y2="308"></line><line x1="384" y1="0" x2="384" y2="308"></line><line x1="400" y1="0" x2="400" y2="308"></line><line x1="416" y1="0" x2="416" y2="308"></line><line x1="432" y1="0" x2="432" y2="308"></line><line x1="448" y1="0" x2="448" y2="308"></line><line x1="464" y1="0" x2="464" y2="308"></line><line x1="480" y1="0" x2="480" y2="308"></line><line x1="496" y1="0" x2="496" y2="308"></line><line x1="512" y1="0" x2="512" y2="308"></line><line x1="528" y1="0" x2="528" y2="308"></line><line x1="544" y1="0" x2="544" y2="308"></line><line x1="560" y1="0" x2="560" y2="308"></line><line x1="576" y1="0" x2="576" y2="308"></line><line x1="592" y1="0" x2="592" y2="308"></line><line x1="608" y1="0" x2="608" y2="308"></line><line x1="624" y1="0" x2="624" y2="308"></line><line x1="640" y1="0" x2="640" y2="308"></line><line x1="656" y1="0" x2="656" y2="308"></line><line x1="0" y1="0" x2="660" y2="0"></line><line x1="0" y1="16" x2="660" y2="16"></line><line x1="0" y1="32" x2="660" y2="32"></line><line x1="0" y1="48" x2="660" y2="48"></line><line x1="0" y1="64" x2="660" y2="64"></line><line x1="0" y1="80" x2="660" y2="80"></line><line x1="0" y1="96" x2="660" y2="96"></line><line x1="0" y1="112" x2="660" y2="112"></line><line x1="0" y1="128" x2="660" y2="128"></line><line x1="0" y1="144" x2="660" y2="144"></line><line x1="0" y1="160" x2="660" y2="160"></line><line x1="0" y1="176" x2="660" y2="176"></line><line x1="0" y1="192" x2="660" y2="192"></line><line x1="0" y1="208" x2="660" y2="208"></line><line x1="0" y1="224" x2="660" y2="224"></line><line x1="0" y1="240" x2="660" y2="240"></line><line x1="0" y1="256" x2="660" y2="256"></line><line x1="0" y1="272" x2="660" y2="272"></line><line x1="0" y1="288" x2="660" y2="288"></line><line x1="0" y1="304" x2="660" y2="304"></line></g><g class="rpd-style-box" data-stage="style" style="opacity:1"><rect class="rpd-style-rect" x="16" y="43" width="96" height="192" rx="0"></rect><text x="64" y="143" text-anchor="middle">STYLE</text></g><line class="rpd-connector rpd-connector--dashed" x1="112" y1="139" x2="140" y2="139" style="opacity:1"></line><line class="rpd-connector rpd-connector--dashed" x1="140" y1="45" x2="140" y2="139" style="opacity:0.25"></line><line class="rpd-connector rpd-connector--dashed" x1="140" y1="139" x2="140" y2="233" style="opacity:0.25"></line><g class="rpd-row" data-tier="S"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="45" x2="502" y2="45" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><g class="rpd-stage" data-stage="composite" style="opacity:0.25"><rect class="rpd-stage-box" x="510" y="28" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="49" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-row" data-tier="C"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="139" x2="362" y2="139" marker-end="url(#rpd-arrow)" style="opacity:1"></line><g class="rpd-stage" data-stage="paint" style="opacity:1"><rect class="rpd-stage-box" x="370" y="122" width="110" height="34" rx="0" stroke="#a78bfa"></rect><text class="rpd-stage-label" x="425" y="143" text-anchor="middle">PAINT</text></g><g class="rpd-stage" data-stage="composite" style="opacity:1"><line class="rpd-connector rpd-connector--solid" x1="480" y1="139" x2="502" y2="139" marker-end="url(#rpd-arrow)" style="opacity:1"></line><rect class="rpd-stage-box" x="510" y="122" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="143" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-row" data-tier="D"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="233" x2="222" y2="233" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><g class="rpd-stage" data-stage="layout" style="opacity:0.25"><rect class="rpd-stage-box" x="230" y="216" width="110" height="34" rx="0" stroke="#e879f9"></rect><text class="rpd-stage-label" x="285" y="237" text-anchor="middle">LAYOUT</text></g><g class="rpd-stage" data-stage="paint" style="opacity:0.25"><line class="rpd-connector rpd-connector--solid" x1="340" y1="233" x2="362" y2="233" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><rect class="rpd-stage-box" x="370" y="216" width="110" height="34" rx="0" stroke="#a78bfa"></rect><text class="rpd-stage-label" x="425" y="237" text-anchor="middle">PAINT</text></g><g class="rpd-stage" data-stage="composite" style="opacity:0.25"><line class="rpd-connector rpd-connector--solid" x1="480" y1="233" x2="502" y2="233" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><rect class="rpd-stage-box" x="510" y="216" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="237" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-caption" aria-hidden="true"><line x1="0" y1="280" x2="660" y2="280"></line><text x="16" y="298">&gt; RENDER PIPELINE</text><text x="644" y="298" text-anchor="end">FIG.<!-- -->05</text></g></svg>
+<h3 id="painted-values">Painted values</h3>
+<p>There&#x27;s plenty of (often out of date) lists out there that will tell you which styles trigger paint and layout. But an easier rule of thumb is to use your common sense: If a value changes <strong>geometry</strong> then it&#x27;ll trigger layout (<code>width</code>, <code>flex</code> etc). But if we&#x27;re only changing something like <code>background-color</code>, <code>color</code>, or <code>border-radius</code>, then this is something that can be handled by the paint step.</p>
+<p>As we saw earlier, <code>transform</code> and <code>opacity</code> etc can also trigger paint when changed on a non-layer element.</p>
+<p>It isn&#x27;t a cut-and-dry fact that paint animations are inherently &quot;bad&quot;, as long as you keep in mind that it&#x27;s <strong>more expensive to paint bigger layers. </strong>Changing the color of a button is probably fine, animating the color of a whole page could get expensive on larger screens.</p>
+<p>Beyond that, as we saw with <code>filter: blur</code>, not all operations are equal. Animating <code>background-color</code> is cheap compared to animating <code>mask-image</code> or <code>background-image</code> gradient, because with the latter we&#x27;re having to draw a brand new gradient image too.</p>
+<h3 id="css-variables">CSS variables</h3>
+<p>CSS variables are powerful, but also surprisingly bad for performance.</p>
+<p>You can animate them with any JS animation library, and increasingly browsers are supporting <code>@property</code>, which lets you animate them with CSS or WAAPI too.</p>
+<p>The first problem with CSS variables, and the reason they sit in C-Tier, is that changing one will <strong>always trigger paint</strong> on affected elements.</p>
+<p>This is true even if an element is <strong>only</strong> using the variable within a compositor value like <code>opacity</code>:</p>
+<pre><code><span>div {<!-- -->
+</span><span>  <span class="cb-attr">--progress</span>: <span class="cb-number">0</span>;<!-- -->
+</span><span>  <span class="cb-attr">opacity</span>: var(--progress);<!-- -->
+</span><span>}</span></code></pre>
+<p>It&#x27;s a quick way to downgrade otherwise performant animations.</p>
+<h4 id="the-inheritance-bomb">The inheritance bomb</h4>
+<p>However, the major, F-Tier performance killer hidden within CSS variables is <strong>inheritance</strong>.</p>
+<p>Many &quot;clever&quot; demos on the web will animate global CSS variables, which are then inherited by various elements within the tree.</p>
+<pre><code><span>html {<!-- -->
+</span><span>  <span class="cb-attr">--progress</span>: <span class="cb-number">0</span>;<!-- -->
+</span><span>}<!-- -->
+</span><span>
+</span><span>.box {<!-- -->
+</span><span>  <span class="cb-attr">transform</span>: translateY(calc(var(--progress) * <span class="cb-number">100px</span>));<!-- -->
+</span><span>}</span></code></pre>
+<p>The problem is that changing this value can invalidate styles across an entire tree, forcing the entire thing to recalculate. This is true even if <code>var(—progress)</code> is only used in a couple of places - or not used at all!</p>
+<p>I recently found a site updating a global CSS variable every frame. It forced style recalculations on 1300+ elements, costing a whopping 8 ms per frame. This is the entire budget for a 120fps animation, just to decide <strong>which</strong> elements needed rendering.</p>
+<p>Replacing this CSS variable with targeted JavaScript style updates reduced this cost to almost nothing. From 8ms to nanoseconds.</p>
+<pre><code><span>box.style.transform = <span class="cb-string">`translateY(${progress * 100}px)`</span></span></code></pre>
+<p>This pattern performs well in isolated CodeSandbox demos, where the DOM is tiny and CSS selectors are simple. But in production, with thousands of nodes and complex selectors, the cost of inherited variables is unpredictable. In the real world, this pattern can completely blow up your performance.</p>
+<h4 id="improving-css-variable-performance">Improving CSS variable performance</h4>
+<p>It can still be safe to animate CSS variables. While I would never recommend them for values like <code>transform</code>, you can safely use them in styles like <code>mask-image</code> that would trigger paint anyway.</p>
+<p>To avoid the inheritance bomb, you&#x27;ve got two options:</p>
+<h5 id="1-reduce-scope">1. Reduce scope</h5>
+<p>Rather than setting the CSS variable globally, set it as close to the point of usage as possible. So instead of <code>html</code>, set it on a particular <code>section</code>.</p>
+<h5 id="2-disable-inheritance">2. Disable inheritance</h5>
+<p>Or, ideally, don&#x27;t inherit at all. By using <code>@property</code> you can define the CSS variable to only affect the current element.</p>
+<pre><code><span>@property --progress {<!-- -->
+</span><span>  <span class="cb-attr">syntax</span>: <span class="cb-string">&quot;&lt;number&gt;&quot;</span>;<!-- -->
+</span><span>  <span class="cb-attr">inherits</span>: false;<!-- -->
+</span><span>  <span class="cb-attr">initial-value</span>: <span class="cb-number">0</span>;<!-- -->
+</span><span>}</span></code></pre>
+<p>This prevents changes to the variable cascading through the DOM, eliminating the risk of recalculation wildfire.</p>
+<p>Registering a variable does come with a one-time style recalculation, so better to batch multiple registrations at once.</p>
+<p>Sometimes this isn&#x27;t applicable, as your animation might rely on inheritance (though in this instance you&#x27;re probably better off with targeted JS updates). But given that changes to even <strong>unused </strong>variables can become a huge problem, <code>inherits: false</code> is a safe default.</p>
+
+<h3 id="svg-attributes">SVG attributes</h3>
+<p>By animating native SVG attributes like path data (<code>d</code>), circle position and radius (<code>cx</code>/<code>cy</code>/<code>r</code>) etc, the browser needs to repaint the shape every frame.</p>
+<p>Sometimes this is unavoidable, for instance when making a &quot;drawing&quot;-style animation. But to move or resize SVG graphics, stick to <code>transform</code> where possible.</p>
+<h3 id="view-transitions">View Transitions</h3>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API">View Transitions API</a> lets you animate between two entirely different views.</p>
+<p>By default, it screenshots the outgoing and incoming views and then crossfades them. This crossfade is performed with <code>opacity</code> via an S-Tier hardware accelerated animation.</p>
+<p>Additionally, they can animate the size and position of elements with matching <code>view-transition-name</code> styles using <code>transform</code> (S-Tier) and <code>width</code>/<code>height</code> (D-Tier).</p>
+<p>So why the C-Tier rank overall? Because of two extra factors at play: <strong>Interruption</strong>, and <strong>isolation</strong>.</p>
+<h4 id="interruption">Interruption</h4>
+<p>As we&#x27;ve established, the point of making animations perform well is to keep UIs responsive. Another key part of this is the ability to instantly interrupt an animation with a new one, starting from the current state. View Transitions can&#x27;t do that.</p>
+<p>You&#x27;re forced to choose between waiting until the current animation has finished, or <a href="https://www.bram.us/2025/01/29/view-transitions-page-interactivity/">instantly finishing the current animation</a> before starting the next one.</p>
+<p>Either your UI is unresponsive, or visually broken.</p>
+<p>In some situations, like full-screen page transitions, this is generally okay. But it&#x27;s completely unsuitable for situations where interactive elements remain in place across both old and new view.</p>
+<p>Motion&#x27;s <code>animateView</code> attempts to improve this situation by queueing and batching interrupting View Transitions. Soon, it will also subtly &quot;fast forward&quot; active animations when interrupted. But these techniques are still a patch rather than a fix.</p>
+<h4 id="isolation">Isolation</h4>
+<p>On the plus side, View Transitions are smart about containing the cost of triggering layout. This touches on something we&#x27;ll explore next, but essentially not all layouts are created equal.</p>
+<p>Each matching <code>view-transition-name</code> element pair is represented by a single <code>::view-transition-group</code> element. This element contains just two other elements, each a snapshot of the old and new elements.</p>
+<p>This is a very simple DOM, with a layout isolated from surrounding elements using <code>position: absolute</code>. The calculations are cheap.</p>
+<p>So while yes, this is by definition a D-Tier animation, it&#x27;s about as good of a D-Tier animation as is possible and further evidence there&#x27;s no hard and fast rules when it comes to web animation.</p>
+<h4 id="further-performance-improvements">Further performance improvements</h4>
+<p>By default, a <code>::view-transition-group</code> always animates its <code>width</code> and <code>height</code>, even when their size is identical.</p>
+<p>View Transition wizard Bramus has figured out <a href="https://www.bram.us/2025/02/07/view-transitions-applied-more-performant-view-transition-group-animations/">a technique</a> to remove these keyframes, leaving only a hardware accelerated position animation, promoting the entire animation to S-Tier. In my opinion, this should be a spec-enshrined technique, but as a proof-of-concept it shows that this is at least possible in some situations.</p>
+<aside class="mag-tier-heading" data-tier="D"><div class="mag-tier-heading-inner" ><div class="mag-tier-heading-badge" aria-hidden="true"><span class="mag-tier-heading-letter">D</span></div><div class="mag-tier-heading-text"><span class="mag-tier-heading-kicker"><span class="mag-tier-heading-kicker-caret">&gt;</span> Tier</span><h2 id="d-tier" class="mag-tier-heading-title">D<!-- -->-Tier</h2><p class="mag-tier-heading-stage">Layout-triggering</p></div></div></aside>
+<p>A D-Tier animation is one where you&#x27;re triggering the <strong>layout</strong> render step, and therefore the entire render pipeline every frame.</p>
+<p>This <strong>can</strong> be a massive hit to your frame budget. Sometimes even high-end devices will drop frames here.</p>
+<svg class="rpd" viewBox="0 0 660 308" role="img" aria-label="Render pipeline: style triggers branch into three paths — composite only, paint then composite, or layout then paint then composite."><defs><marker id="rpd-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 L11 6 L1 11 Z" class="rpd-arrowhead"></path></marker><marker id="rpd-arrow-f" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 L11 6 L1 11 Z" fill="#f43f5e"></path></marker></defs><g class="rpd-grid" aria-hidden="true"><line x1="0" y1="0" x2="0" y2="308"></line><line x1="16" y1="0" x2="16" y2="308"></line><line x1="32" y1="0" x2="32" y2="308"></line><line x1="48" y1="0" x2="48" y2="308"></line><line x1="64" y1="0" x2="64" y2="308"></line><line x1="80" y1="0" x2="80" y2="308"></line><line x1="96" y1="0" x2="96" y2="308"></line><line x1="112" y1="0" x2="112" y2="308"></line><line x1="128" y1="0" x2="128" y2="308"></line><line x1="144" y1="0" x2="144" y2="308"></line><line x1="160" y1="0" x2="160" y2="308"></line><line x1="176" y1="0" x2="176" y2="308"></line><line x1="192" y1="0" x2="192" y2="308"></line><line x1="208" y1="0" x2="208" y2="308"></line><line x1="224" y1="0" x2="224" y2="308"></line><line x1="240" y1="0" x2="240" y2="308"></line><line x1="256" y1="0" x2="256" y2="308"></line><line x1="272" y1="0" x2="272" y2="308"></line><line x1="288" y1="0" x2="288" y2="308"></line><line x1="304" y1="0" x2="304" y2="308"></line><line x1="320" y1="0" x2="320" y2="308"></line><line x1="336" y1="0" x2="336" y2="308"></line><line x1="352" y1="0" x2="352" y2="308"></line><line x1="368" y1="0" x2="368" y2="308"></line><line x1="384" y1="0" x2="384" y2="308"></line><line x1="400" y1="0" x2="400" y2="308"></line><line x1="416" y1="0" x2="416" y2="308"></line><line x1="432" y1="0" x2="432" y2="308"></line><line x1="448" y1="0" x2="448" y2="308"></line><line x1="464" y1="0" x2="464" y2="308"></line><line x1="480" y1="0" x2="480" y2="308"></line><line x1="496" y1="0" x2="496" y2="308"></line><line x1="512" y1="0" x2="512" y2="308"></line><line x1="528" y1="0" x2="528" y2="308"></line><line x1="544" y1="0" x2="544" y2="308"></line><line x1="560" y1="0" x2="560" y2="308"></line><line x1="576" y1="0" x2="576" y2="308"></line><line x1="592" y1="0" x2="592" y2="308"></line><line x1="608" y1="0" x2="608" y2="308"></line><line x1="624" y1="0" x2="624" y2="308"></line><line x1="640" y1="0" x2="640" y2="308"></line><line x1="656" y1="0" x2="656" y2="308"></line><line x1="0" y1="0" x2="660" y2="0"></line><line x1="0" y1="16" x2="660" y2="16"></line><line x1="0" y1="32" x2="660" y2="32"></line><line x1="0" y1="48" x2="660" y2="48"></line><line x1="0" y1="64" x2="660" y2="64"></line><line x1="0" y1="80" x2="660" y2="80"></line><line x1="0" y1="96" x2="660" y2="96"></line><line x1="0" y1="112" x2="660" y2="112"></line><line x1="0" y1="128" x2="660" y2="128"></line><line x1="0" y1="144" x2="660" y2="144"></line><line x1="0" y1="160" x2="660" y2="160"></line><line x1="0" y1="176" x2="660" y2="176"></line><line x1="0" y1="192" x2="660" y2="192"></line><line x1="0" y1="208" x2="660" y2="208"></line><line x1="0" y1="224" x2="660" y2="224"></line><line x1="0" y1="240" x2="660" y2="240"></line><line x1="0" y1="256" x2="660" y2="256"></line><line x1="0" y1="272" x2="660" y2="272"></line><line x1="0" y1="288" x2="660" y2="288"></line><line x1="0" y1="304" x2="660" y2="304"></line></g><g class="rpd-style-box" data-stage="style" style="opacity:1"><rect class="rpd-style-rect" x="16" y="43" width="96" height="192" rx="0"></rect><text x="64" y="143" text-anchor="middle">STYLE</text></g><line class="rpd-connector rpd-connector--dashed" x1="112" y1="139" x2="140" y2="139" style="opacity:1"></line><line class="rpd-connector rpd-connector--dashed" x1="140" y1="45" x2="140" y2="139" style="opacity:0.25"></line><line class="rpd-connector rpd-connector--dashed" x1="140" y1="139" x2="140" y2="233" style="opacity:1"></line><g class="rpd-row" data-tier="S"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="45" x2="502" y2="45" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><g class="rpd-stage" data-stage="composite" style="opacity:0.25"><rect class="rpd-stage-box" x="510" y="28" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="49" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-row" data-tier="C"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="139" x2="362" y2="139" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><g class="rpd-stage" data-stage="paint" style="opacity:0.25"><rect class="rpd-stage-box" x="370" y="122" width="110" height="34" rx="0" stroke="#a78bfa"></rect><text class="rpd-stage-label" x="425" y="143" text-anchor="middle">PAINT</text></g><g class="rpd-stage" data-stage="composite" style="opacity:0.25"><line class="rpd-connector rpd-connector--solid" x1="480" y1="139" x2="502" y2="139" marker-end="url(#rpd-arrow)" style="opacity:0.25"></line><rect class="rpd-stage-box" x="510" y="122" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="143" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-row" data-tier="D"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="233" x2="222" y2="233" marker-end="url(#rpd-arrow)" style="opacity:1"></line><g class="rpd-stage" data-stage="layout" style="opacity:1"><rect class="rpd-stage-box" x="230" y="216" width="110" height="34" rx="0" stroke="#e879f9"></rect><text class="rpd-stage-label" x="285" y="237" text-anchor="middle">LAYOUT</text></g><g class="rpd-stage" data-stage="paint" style="opacity:1"><line class="rpd-connector rpd-connector--solid" x1="340" y1="233" x2="362" y2="233" marker-end="url(#rpd-arrow)" style="opacity:1"></line><rect class="rpd-stage-box" x="370" y="216" width="110" height="34" rx="0" stroke="#a78bfa"></rect><text class="rpd-stage-label" x="425" y="237" text-anchor="middle">PAINT</text></g><g class="rpd-stage" data-stage="composite" style="opacity:1"><line class="rpd-connector rpd-connector--solid" x1="480" y1="233" x2="502" y2="233" marker-end="url(#rpd-arrow)" style="opacity:1"></line><rect class="rpd-stage-box" x="510" y="216" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="237" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-caption" aria-hidden="true"><line x1="0" y1="280" x2="660" y2="280"></line><text x="16" y="298">&gt; RENDER PIPELINE</text><text x="644" y="298" text-anchor="end">FIG.<!-- -->06</text></g></svg>
+<h3 id="layout">Layout</h3>
+<p>Changing an element&#x27;s layout will recalculate the geometry of one or more elements.</p>
+<p>Any change in layout can ripple throughout a page and a wide number of styles can affect layout, like <code>width</code>, <code>margin</code>, <code>border</code>, <code>top</code>, <code>display</code>, <code>justify-content</code>, <code>grid-template-columns</code> and more.</p>
+<p>As we&#x27;ve seen, not all layout calculations are equal. Their cost scales with the size and complexity of the tree you&#x27;re invalidating.</p>
+<p>A layout change on a tiny, isolated component with no children will be very cheap. Animating the <code>width</code> of a top-level container, surrounded by siblings, containing hundreds of children all with reflowing text - it&#x27;ll cost ya.</p>
+<h4 id="reduce-the-cost-of-layout">Reduce the cost of layout</h4>
+<p>The browser is already quite intelligent about scoping layout recalculations. For instance, changes to the size and position of a <code>position: absolute</code> or <code>position: fixed</code> element aren&#x27;t going to trigger the recalculation of surrounding elements, as their layouts are isolated.</p>
+<p>You can also manually tell the browser that a layout is contained by using the <code>contain</code> <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/contain">CSS rule</a>. This tells the browser that changes to layout within an element aren&#x27;t going to affect the layouts of surrounding elements.</p>
+<aside class="mag-tier-heading" data-tier="F"><div class="mag-tier-heading-inner" ><div class="mag-tier-heading-badge" aria-hidden="true"><span class="mag-tier-heading-letter">F</span></div><div class="mag-tier-heading-text"><span class="mag-tier-heading-kicker"><span class="mag-tier-heading-kicker-caret">&gt;</span> Tier</span><h2 id="f-tier" class="mag-tier-heading-title">F<!-- -->-Tier</h2><p class="mag-tier-heading-stage">Thrashing</p></div></div></aside>
+<p>The F-Tier is the cardinal sin of web animations. I didn&#x27;t even bother with an E-Tier - this is the one to avoid. An instant fail.</p>
+<h3 id="thrashing">Thrashing</h3>
+<p><strong>Style</strong> and <strong>layout</strong> thrashing is the process of writing to the DOM, measuring it, writing, measuring and so on.</p>
+<svg class="rpd" viewBox="0 0 660 404" role="img" aria-label="Render pipeline: style triggers branch into three paths — composite only, paint then composite, or layout then paint then composite."><defs><marker id="rpd-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 L11 6 L1 11 Z" class="rpd-arrowhead"></path></marker><marker id="rpd-arrow-f" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 L11 6 L1 11 Z" fill="#f43f5e"></path></marker></defs><g class="rpd-grid" aria-hidden="true"><line x1="0" y1="0" x2="0" y2="404"></line><line x1="16" y1="0" x2="16" y2="404"></line><line x1="32" y1="0" x2="32" y2="404"></line><line x1="48" y1="0" x2="48" y2="404"></line><line x1="64" y1="0" x2="64" y2="404"></line><line x1="80" y1="0" x2="80" y2="404"></line><line x1="96" y1="0" x2="96" y2="404"></line><line x1="112" y1="0" x2="112" y2="404"></line><line x1="128" y1="0" x2="128" y2="404"></line><line x1="144" y1="0" x2="144" y2="404"></line><line x1="160" y1="0" x2="160" y2="404"></line><line x1="176" y1="0" x2="176" y2="404"></line><line x1="192" y1="0" x2="192" y2="404"></line><line x1="208" y1="0" x2="208" y2="404"></line><line x1="224" y1="0" x2="224" y2="404"></line><line x1="240" y1="0" x2="240" y2="404"></line><line x1="256" y1="0" x2="256" y2="404"></line><line x1="272" y1="0" x2="272" y2="404"></line><line x1="288" y1="0" x2="288" y2="404"></line><line x1="304" y1="0" x2="304" y2="404"></line><line x1="320" y1="0" x2="320" y2="404"></line><line x1="336" y1="0" x2="336" y2="404"></line><line x1="352" y1="0" x2="352" y2="404"></line><line x1="368" y1="0" x2="368" y2="404"></line><line x1="384" y1="0" x2="384" y2="404"></line><line x1="400" y1="0" x2="400" y2="404"></line><line x1="416" y1="0" x2="416" y2="404"></line><line x1="432" y1="0" x2="432" y2="404"></line><line x1="448" y1="0" x2="448" y2="404"></line><line x1="464" y1="0" x2="464" y2="404"></line><line x1="480" y1="0" x2="480" y2="404"></line><line x1="496" y1="0" x2="496" y2="404"></line><line x1="512" y1="0" x2="512" y2="404"></line><line x1="528" y1="0" x2="528" y2="404"></line><line x1="544" y1="0" x2="544" y2="404"></line><line x1="560" y1="0" x2="560" y2="404"></line><line x1="576" y1="0" x2="576" y2="404"></line><line x1="592" y1="0" x2="592" y2="404"></line><line x1="608" y1="0" x2="608" y2="404"></line><line x1="624" y1="0" x2="624" y2="404"></line><line x1="640" y1="0" x2="640" y2="404"></line><line x1="656" y1="0" x2="656" y2="404"></line><line x1="0" y1="0" x2="660" y2="0"></line><line x1="0" y1="16" x2="660" y2="16"></line><line x1="0" y1="32" x2="660" y2="32"></line><line x1="0" y1="48" x2="660" y2="48"></line><line x1="0" y1="64" x2="660" y2="64"></line><line x1="0" y1="80" x2="660" y2="80"></line><line x1="0" y1="96" x2="660" y2="96"></line><line x1="0" y1="112" x2="660" y2="112"></line><line x1="0" y1="128" x2="660" y2="128"></line><line x1="0" y1="144" x2="660" y2="144"></line><line x1="0" y1="160" x2="660" y2="160"></line><line x1="0" y1="176" x2="660" y2="176"></line><line x1="0" y1="192" x2="660" y2="192"></line><line x1="0" y1="208" x2="660" y2="208"></line><line x1="0" y1="224" x2="660" y2="224"></line><line x1="0" y1="240" x2="660" y2="240"></line><line x1="0" y1="256" x2="660" y2="256"></line><line x1="0" y1="272" x2="660" y2="272"></line><line x1="0" y1="288" x2="660" y2="288"></line><line x1="0" y1="304" x2="660" y2="304"></line><line x1="0" y1="320" x2="660" y2="320"></line><line x1="0" y1="336" x2="660" y2="336"></line><line x1="0" y1="352" x2="660" y2="352"></line><line x1="0" y1="368" x2="660" y2="368"></line><line x1="0" y1="384" x2="660" y2="384"></line><line x1="0" y1="400" x2="660" y2="400"></line></g><g class="rpd-style-box" data-stage="style" style="opacity:1"><rect class="rpd-style-rect" x="16" y="43" width="96" height="192" rx="0"></rect><text x="64" y="143" text-anchor="middle">STYLE</text></g><line class="rpd-connector rpd-connector--dashed" x1="112" y1="139" x2="140" y2="139" style="opacity:1"></line><line class="rpd-connector rpd-connector--dashed" x1="140" y1="45" x2="140" y2="139" style="opacity:1"></line><line class="rpd-connector rpd-connector--dashed" x1="140" y1="139" x2="140" y2="233" style="opacity:1"></line><g class="rpd-row" data-tier="S"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="45" x2="502" y2="45" marker-end="url(#rpd-arrow)" style="opacity:1"></line><g class="rpd-stage" data-stage="composite" style="opacity:1"><rect class="rpd-stage-box" x="510" y="28" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="49" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-row" data-tier="C"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="139" x2="362" y2="139" marker-end="url(#rpd-arrow)" style="opacity:1"></line><g class="rpd-stage" data-stage="paint" style="opacity:1"><rect class="rpd-stage-box" x="370" y="122" width="110" height="34" rx="0" stroke="#a78bfa"></rect><text class="rpd-stage-label" x="425" y="143" text-anchor="middle">PAINT</text></g><g class="rpd-stage" data-stage="composite" style="opacity:1"><line class="rpd-connector rpd-connector--solid" x1="480" y1="139" x2="502" y2="139" marker-end="url(#rpd-arrow)" style="opacity:1"></line><rect class="rpd-stage-box" x="510" y="122" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="143" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-row" data-tier="D"><line class="rpd-connector rpd-connector--dashed" x1="140" y1="233" x2="222" y2="233" marker-end="url(#rpd-arrow)" style="opacity:1"></line><g class="rpd-stage" data-stage="layout" style="opacity:1"><rect class="rpd-stage-box" x="230" y="216" width="110" height="34" rx="0" stroke="#e879f9"></rect><text class="rpd-stage-label" x="285" y="237" text-anchor="middle">LAYOUT</text></g><g class="rpd-stage" data-stage="paint" style="opacity:1"><line class="rpd-connector rpd-connector--solid" x1="340" y1="233" x2="362" y2="233" marker-end="url(#rpd-arrow)" style="opacity:1"></line><rect class="rpd-stage-box" x="370" y="216" width="110" height="34" rx="0" stroke="#a78bfa"></rect><text class="rpd-stage-label" x="425" y="237" text-anchor="middle">PAINT</text></g><g class="rpd-stage" data-stage="composite" style="opacity:1"><line class="rpd-connector rpd-connector--solid" x1="480" y1="233" x2="502" y2="233" marker-end="url(#rpd-arrow)" style="opacity:1"></line><rect class="rpd-stage-box" x="510" y="216" width="110" height="34" rx="0" stroke="#fbbf24"></rect><text class="rpd-stage-label" x="565" y="237" text-anchor="middle">COMPOSITE</text></g></g><g class="rpd-thrash" aria-hidden="true"><line x1="620" y1="45" x2="644" y2="45" class="rpd-thrash-line"></line><line x1="620" y1="139" x2="644" y2="139" class="rpd-thrash-line"></line><line x1="620" y1="233" x2="644" y2="233" class="rpd-thrash-line"></line><line x1="644" y1="45" x2="644" y2="338" class="rpd-thrash-line"></line><line x1="644" y1="338" x2="348" y2="338" class="rpd-thrash-line" marker-end="url(#rpd-arrow-f)"></line><path d="M222 338 L64 338 L64 243" class="rpd-thrash-line" fill="none" marker-end="url(#rpd-arrow-f)"></path><rect class="rpd-thrash-read" x="230" y="321" width="110" height="34" rx="0"></rect><text class="rpd-thrash-read-label" x="285" y="342" text-anchor="middle">READ</text></g><g class="rpd-caption" aria-hidden="true"><line x1="0" y1="376" x2="660" y2="376"></line><text x="16" y="394">&gt; RENDER PIPELINE</text><text x="644" y="394" text-anchor="end">FIG.<!-- -->07</text></g></svg>
+<p>For example, if we set an element&#x27;s dimensions:</p>
+<pre><code><span>element.style.width = <span class="cb-string">&quot;100px&quot;</span></span></code></pre>
+<p>Then read them back:</p>
+<pre><code><span><span class="cb-keyword">const</span> width = element.offsetWidth</span></code></pre>
+<p>Then set them again:</p>
+<pre><code><span>element.style.width = width * 2 + <span class="cb-string">&quot;px&quot;</span></span></code></pre>
+<p>And so on - this is thrashing.</p>
+<p>Or a more real-world use-case:</p>
+<pre><code><span><span class="cb-keyword">const</span> header = <span class="cb-function">useRef</span>()<!-- -->
+</span><span>
+</span><span><span class="cb-function">useLayoutEffect</span>(() <span class="cb-arrow">=&gt;</span> {<!-- -->
+</span><span>  <span class="cb-keyword">const</span> element = header.current<!-- -->
+</span><span>  <!-- -->
+</span><span><span class="cb-comment">  // Read</span>
+</span><span>  <span class="cb-keyword">if</span> (element.scrollWidth &gt; element.clientWidth) {<!-- -->
+</span><span><span class="cb-comment">    // Write</span>
+</span><span>    header.current.dataset.overflowing = <span class="cb-string">&quot;yes&quot;</span>;<!-- -->
+</span><span>  } <span class="cb-keyword">else</span> {<!-- -->
+</span><span>    header.current.dataset.overflowing = <span class="cb-string">&quot;&quot;</span>;<!-- -->
+</span><span>  }<!-- -->
+</span><span>}, [text]);<!-- -->
+</span><span>
+</span><span><span class="cb-keyword">return</span> &lt;<span class="cb-tag">div</span> ref={header}&gt;...&lt;/<span class="cb-tag">div</span>&gt;</span></code></pre>
+<p>With just one instance of this component, but if you start rendering many versions of this component then you&#x27;re in serious thrashing territory.</p>
+<p>This has a massive negative effect on performance and is easily introduced to a site by mixing various different libraries that are each reading and writing from the DOM.</p>
+<p>It&#x27;s not always obvious when you&#x27;re reading from the DOM. For instance, take this Motion animation:</p>
+<pre><code><span>animate(element, { width: <span class="cb-string">&quot;auto&quot;</span> })</span></code></pre>
+<p>How does Motion know what <code>auto</code> is? Typically, JS animation libraries will resolve keyframes like this immediately, often involving a read/write.</p>
+<p>But instead, Motion uses a WAAPI-inspired process called <strong>deferred keyframe resolution</strong> to ensure that all these reads and writes are batched, and this batching is why Motion is <a href="https://motion.dev/docs/gsap-vs-motion#start-up-time">2.5x faster than GSAP</a> at animating from unknown values, and 6x faster at unit conversion.</p>
+<svg class="rpd" viewBox="0 0 660 240" role="img" aria-label="Motion 11 vs GSAP 10 benchmark: Motion is 2.5× faster at cold start and 6× faster at unit conversion."><g class="rpd-grid" aria-hidden="true"><line x1="0" y1="0" x2="0" y2="240"></line><line x1="16" y1="0" x2="16" y2="240"></line><line x1="32" y1="0" x2="32" y2="240"></line><line x1="48" y1="0" x2="48" y2="240"></line><line x1="64" y1="0" x2="64" y2="240"></line><line x1="80" y1="0" x2="80" y2="240"></line><line x1="96" y1="0" x2="96" y2="240"></line><line x1="112" y1="0" x2="112" y2="240"></line><line x1="128" y1="0" x2="128" y2="240"></line><line x1="144" y1="0" x2="144" y2="240"></line><line x1="160" y1="0" x2="160" y2="240"></line><line x1="176" y1="0" x2="176" y2="240"></line><line x1="192" y1="0" x2="192" y2="240"></line><line x1="208" y1="0" x2="208" y2="240"></line><line x1="224" y1="0" x2="224" y2="240"></line><line x1="240" y1="0" x2="240" y2="240"></line><line x1="256" y1="0" x2="256" y2="240"></line><line x1="272" y1="0" x2="272" y2="240"></line><line x1="288" y1="0" x2="288" y2="240"></line><line x1="304" y1="0" x2="304" y2="240"></line><line x1="320" y1="0" x2="320" y2="240"></line><line x1="336" y1="0" x2="336" y2="240"></line><line x1="352" y1="0" x2="352" y2="240"></line><line x1="368" y1="0" x2="368" y2="240"></line><line x1="384" y1="0" x2="384" y2="240"></line><line x1="400" y1="0" x2="400" y2="240"></line><line x1="416" y1="0" x2="416" y2="240"></line><line x1="432" y1="0" x2="432" y2="240"></line><line x1="448" y1="0" x2="448" y2="240"></line><line x1="464" y1="0" x2="464" y2="240"></line><line x1="480" y1="0" x2="480" y2="240"></line><line x1="496" y1="0" x2="496" y2="240"></line><line x1="512" y1="0" x2="512" y2="240"></line><line x1="528" y1="0" x2="528" y2="240"></line><line x1="544" y1="0" x2="544" y2="240"></line><line x1="560" y1="0" x2="560" y2="240"></line><line x1="576" y1="0" x2="576" y2="240"></line><line x1="592" y1="0" x2="592" y2="240"></line><line x1="608" y1="0" x2="608" y2="240"></line><line x1="624" y1="0" x2="624" y2="240"></line><line x1="640" y1="0" x2="640" y2="240"></line><line x1="656" y1="0" x2="656" y2="240"></line><line x1="0" y1="0" x2="660" y2="0"></line><line x1="0" y1="16" x2="660" y2="16"></line><line x1="0" y1="32" x2="660" y2="32"></line><line x1="0" y1="48" x2="660" y2="48"></line><line x1="0" y1="64" x2="660" y2="64"></line><line x1="0" y1="80" x2="660" y2="80"></line><line x1="0" y1="96" x2="660" y2="96"></line><line x1="0" y1="112" x2="660" y2="112"></line><line x1="0" y1="128" x2="660" y2="128"></line><line x1="0" y1="144" x2="660" y2="144"></line><line x1="0" y1="160" x2="660" y2="160"></line><line x1="0" y1="176" x2="660" y2="176"></line><line x1="0" y1="192" x2="660" y2="192"></line><line x1="0" y1="208" x2="660" y2="208"></line><line x1="0" y1="224" x2="660" y2="224"></line><line x1="0" y1="240" x2="660" y2="240"></line></g><g class="rpd-bench-group"><text class="rpd-bench-kicker" x="16" y="28">&gt; <!-- -->COLD START</text><text class="rpd-bench-row-label" x="134" y="59" text-anchor="end">GSAP 10.0</text><rect class="rpd-bench-bar rpd-bench-bar--baseline" x="148" y="50" width="472" height="10" rx="0"></rect><text class="rpd-bench-row-label" x="134" y="83" text-anchor="end">MOTION 11.0</text><rect class="rpd-bench-bar rpd-bench-bar--faster" x="148" y="74" width="188.8" height="10" rx="0" stroke="#60a5fa" fill="#60a5fa22"></rect><text class="rpd-bench-speedup" x="350.8" y="83" style="fill:#60a5fa">2.5×<!-- --> FASTER</text></g><g class="rpd-bench-group"><text class="rpd-bench-kicker" x="16" y="134">&gt; <!-- -->UNIT CONVERSION</text><text class="rpd-bench-row-label" x="134" y="165" text-anchor="end">GSAP 10.0</text><rect class="rpd-bench-bar rpd-bench-bar--baseline" x="148" y="156" width="472" height="10" rx="0"></rect><text class="rpd-bench-row-label" x="134" y="189" text-anchor="end">MOTION 11.0</text><rect class="rpd-bench-bar rpd-bench-bar--faster" x="148" y="180" width="78.66666666666666" height="10" rx="0" stroke="#e879f9" fill="#e879f922"></rect><text class="rpd-bench-speedup" x="240.66666666666666" y="189" style="fill:#e879f9">6×<!-- --> FASTER</text></g><g class="rpd-caption" aria-hidden="true"><line x1="0" y1="212" x2="660" y2="212"></line><text x="16" y="230">&gt; MOTION VS GSAP</text><text x="644" y="230" text-anchor="end">FIG.<!-- -->08</text></g></svg>
+<p>Motion batches all reads and writes every animation frame, and offers this as a low-level API called <code>frame</code>. This ensures that other library authors and developers can avoid stepping on each other&#x27;s toes and inadvertently introducing thrashing.</p>
+<pre><code><span><span class="cb-keyword">let</span> width = <span class="cb-number">0</span>
+</span><span>frame.<span class="cb-function">read</span>(() <span class="cb-arrow">=&gt;</span> {<!-- -->
+</span><span>  width = element.offsetWidth<!-- -->
+</span><span>
+</span><span>  frame.<span class="cb-function">update</span>(() <span class="cb-arrow">=&gt;</span> {<!-- -->
+</span><span>    element.style.width = width * <span class="cb-number">2</span> + <span class="cb-string">&quot;px&quot;</span>
+</span><span>  })<!-- -->
+</span><span>})</span></code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>Performance isn&#x27;t a dark art. But it is an art. Understanding how the render pipeline works gives you the instincts to know <strong>why</strong> an animation might be janky, and what to reach for instead.</p>
+<p>There&#x27;s no hard rules. Every choice - memory, layers, hardware acceleration etc - has intersecting tradeoffs. Although in my experience 90% of performance issues are just a big <code>filter: blur</code>, hopefully you&#x27;re now better equipped to deal with the remaining 10%.</p>
+<p>At almost 4000 words this post turned out longer than I expected, yet I still feel like I&#x27;m missing some things, or didn&#x27;t go deep enough on others. Is there anything still stumping you? Or perhaps you want a post exploring one of the topics above in greater detail? <a href="https://x.com/motiondotdev">Let me know</a>!</p>
+<p><strong>PS</strong>: Many thanks to <a href="https://x.com/kurtextrem">Jacob </a>and <a href="https://x.com/iamakulov">Ivan</a> from Framer for proof-reading and fact-checking this post!</p>
+</div></div></article>
+    </div>
+</body>
+</html>

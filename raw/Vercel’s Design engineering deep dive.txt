@@ -1,0 +1,12 @@
+Video title: Vercel’s Glenn Hitchcock & John Pham - Design engineering deep dive
+Date: 04/2024
+Url: https://www.youtube.com/watch?v=U9X2tgPYcNk
+
+For designers or engineers looking to step into a design engineering role, the conversation with Glenn Hitchcock and John Pham highlights several key pillars for growth and professional development:
+
+Bridge the "Design Execution Gap": The core of being a design engineer is closing the distance between your creative vision and your technical implementation (39:48). Don't just design static artifacts; focus on becoming a "Builder" who has the skills to bring concepts to life in the browser.
+Develop Taste and Technical Proficiency: A design engineer sits at the intersection of aesthetic taste and engineering logic (2:26). You don't need to be 50/50, but you must demonstrate the ability to handle both design strategy and code implementation effectively (16:57).
+Learn by Collaboration: If you are currently a developer, pair with designers to understand the why and the intent behind design choices (29:56). If you are a designer, start learning the language of the web (CSS, layout, and performance) to understand how your visuals translate to code (31:05).
+Focus on Reusability and Systems: Design engineers think about scalability. Even when working on a one-off animation or marketing page, look for ways to build generic, reusable components that can serve multiple contexts across the product (17:48, 19:51).
+Don't Aim to be a 'Copy': There is no single profile for a design engineer. Whether your strength is in 3D, design systems, accessibility, or interaction, focus on the unique traits you bring to the table. Hiring teams aren't looking for clones; they are looking for people who can bridge the gap between disciplines (16:37, 40:49).
+Master the Medium: Stop relying solely on static design tools for complex interactions. Prototype in the browser or code-based tools to account for nuances in animation curves, easing, and responsiveness that cannot be fully realized in static software (8:50).

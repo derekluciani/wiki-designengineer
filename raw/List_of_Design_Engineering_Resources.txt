@@ -1,0 +1,10 @@
+List of Design Engineering Online Resources
+
+- Details that make interfaces feel better [ARTICLE], https://jakub.kr/writing/details-that-make-interfaces-feel-better
+- Practical Playbook [SNIPPETS], https://www.craftofui.dev/
+- Devouring Details [COURSE], https://devouringdetails.com/
+- Design Engineer LLM Skills [SKILLS], https://www.ui-skills.com/
+- Technical Reference Manual [EBOOK], https://www.makingsoftware.com/
+- Design Engineering Magazine, [ARTICLES] https://interfaces.dev/
+- Learn OKLCH color model [TOOL], https://oklch.fyi/
+

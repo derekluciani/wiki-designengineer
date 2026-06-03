@@ -1,0 +1,1193 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Animation Vocabulary Reference</title>
+        <style>
+            :root {
+                --bg-color: #fafafa;
+                --text-color: #262626;
+                --text-muted: #737373;
+                --border-color: #e5e5e5;
+                --accent-color: #2563eb;
+                --code-bg: #f5f5f5;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --bg-color: #0d0d0d;
+                    --text-color: #e5e5e5;
+                    --text-muted: #a3a3a3;
+                    --border-color: #262626;
+                    --accent-color: #3b82f6;
+                    --code-bg: #1a1a1a;
+                }
+            }
+            body {
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                    Helvetica, Arial, sans-serif;
+                line-height: 1.6;
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                max-width: 760px;
+                margin: 0 auto;
+                padding: 40px 20px 80px 20px;
+                -webkit-font-smoothing: antialiased;
+            }
+            header {
+                margin-bottom: 50px;
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 30px;
+            }
+            h1 {
+                font-size: 2.2rem;
+                font-weight: 800;
+                letter-spacing: -0.03em;
+                margin: 0 0 15px 0;
+                color: var(--text-color);
+            }
+            header p {
+                font-size: 1.15rem;
+                color: var(--text-muted);
+                margin: 0;
+                line-height: 1.5;
+            }
+            section {
+                margin-bottom: 60px;
+            }
+            h2 {
+                font-size: 1.4rem;
+                font-weight: 700;
+                margin: 30px 0 15px 0;
+                letter-spacing: -0.01em;
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 8px;
+            }
+            h2 a {
+                color: var(--text-color);
+                text-decoration: none;
+            }
+            section > p {
+                font-size: 1rem;
+                color: var(--text-muted);
+                margin: 0 0 20px 0;
+            }
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            li {
+                padding: 12px 16px;
+                margin-bottom: 10px;
+                background-color: var(--code-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 6px;
+                font-size: 1rem;
+                display: flex;
+                align-items: flex-start;
+            }
+            li::before {
+                content: "•";
+                color: var(--accent-color);
+                font-weight: bold;
+                margin-right: 12px;
+                font-size: 1.2rem;
+                line-height: 1.2;
+            }
+            li p {
+                margin: 0;
+            }
+            .font-bold,
+            strong {
+                font-weight: 700;
+                color: var(--text-color);
+                margin-right: 4px;
+            }
+            code {
+                font-family:
+                    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                    monospace;
+                font-size: 0.9em;
+                background-color: var(--code-bg);
+                padding: 2px 4px;
+                border-radius: 4px;
+                border: 1px solid var(--border-color);
+            }
+        </style>
+    </head>
+    <body>
+        <div
+            class="layout-root text-gray-1200 mx-auto mt-6! mb-8 w-full max-w-[732px] px-4 sm:mt-32 md:mt-20 md:mb-12"
+        >
+            <div class="font-mono">
+                <div class="mx-auto mt-32 space-y-12 text-left">
+                    <header class="mb-28 space-y-4">
+                        <h1 class="text-gray-1200 text-2xl font-bold">
+                            Animation Vocabulary
+                        </h1>
+                        <p class="text-gray-1200 text-[15px] leading-relaxed">
+                            A glossary of common animation patterns taught in
+                            the course. Use these names to describe what you
+                            want when prompting an AI.
+                        </p>
+                    </header>
+                    <section
+                        id="entrances-and-exits"
+                        class="mb-24 scroll-mt-24 space-y-4"
+                    >
+                        <h2 class="text-gray-1200 mb-4 text-base font-bold">
+                            <a href="#entrances-and-exits" class="no-underline"
+                                >Entrances & Exits</a
+                            >
+                        </h2>
+                        <p
+                            class="text-gray-1200 mb-6 text-[15px] leading-relaxed"
+                        >
+                            How elements appear and disappear.
+                        </p>
+                        <ul class="m-0 list-none space-y-2.5 p-0">
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Fade in / Fade out
+                                    </span>
+                                    — Element appears or disappears by changing
+                                    opacity.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Slide in
+                                    </span>
+                                    — Element enters by sliding in from
+                                    off-screen (left, right, top, or bottom).
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Scale in
+                                    </span>
+                                    — Element grows from smaller to full size as
+                                    it appears, often paired with a fade.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Pop in
+                                    </span>
+                                    — Element appears with a slight overshoot,
+                                    like it bounces into place.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Reveal
+                                    </span>
+                                    — Content is uncovered gradually, often by
+                                    animating a clip-path or mask.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Enter / Exit
+                                    </span>
+                                    — The animation an element plays when it’s
+                                    added to or removed from the screen.
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section
+                        id="sequencing-and-timing"
+                        class="mb-24 scroll-mt-24 space-y-4"
+                    >
+                        <h2 class="text-gray-1200 mb-4 text-base font-bold">
+                            <a
+                                href="#sequencing-and-timing"
+                                class="no-underline"
+                                >Sequencing & Timing</a
+                            >
+                        </h2>
+                        <p
+                            class="text-gray-1200 mb-6 text-[15px] leading-relaxed"
+                        >
+                            Coordinating multiple elements or moments.
+                        </p>
+                        <ul class="m-0 list-none space-y-2.5 p-0">
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Keyframes
+                                    </span>
+                                    — Defined points in an animation (0%, 50%,
+                                    100%) that the browser fills the gaps
+                                    between.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Interpolation / Tween
+                                    </span>
+                                    — Generating all the in-between frames
+                                    between a start and end value, so motion is
+                                    continuous.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Stagger
+                                    </span>
+                                    — Animate several items one after another
+                                    with a small delay between each, creating a
+                                    cascade.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Orchestration
+                                    </span>
+                                    — Deliberately timing multiple animations so
+                                    they feel like one coordinated motion.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Delay
+                                    </span>
+                                    — Time before an animation starts.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Duration
+                                    </span>
+                                    — How long an animation takes.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Fill mode
+                                    </span>
+                                    — Whether an element keeps its first or last
+                                    frame's styles before the animation starts
+                                    or after it ends (e.g. forwards).
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Stepped animation
+                                    </span>
+                                    — An animation that is divided into discrete
+                                    steps, like a countdown timer.
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section
+                        id="movement-and-transforms"
+                        class="mb-24 scroll-mt-24 space-y-4"
+                    >
+                        <h2 class="text-gray-1200 mb-4 text-base font-bold">
+                            <a
+                                href="#movement-and-transforms"
+                                class="no-underline"
+                                >Movement & Transforms</a
+                            >
+                        </h2>
+                        <p
+                            class="text-gray-1200 mb-6 text-[15px] leading-relaxed"
+                        >
+                            Changing an element’s position, size, or angle.
+                        </p>
+                        <ul class="m-0 list-none space-y-2.5 p-0">
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Translate
+                                    </span>
+                                    — Move an element along the X or Y axis.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Scale
+                                    </span>
+                                    — Make an element bigger or smaller.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Rotate
+                                    </span>
+                                    — Spin an element around a point.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Skew
+                                    </span>
+                                    — Slant an element along the X or Y axis,
+                                    shearing it out of its rectangular shape.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >3D tilt / Flip
+                                    </span>
+                                    — Rotate in 3D space (rotateX / rotateY) to
+                                    add depth.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Perspective
+                                    </span>
+                                    — How strong the 3D effect looks — a lower
+                                    value exaggerates depth, like the viewer is
+                                    closer.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Transform origin
+                                    </span>
+                                    — The anchor point a scale or rotation grows
+                                    or spins from.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Origin-aware animation
+                                    </span>
+                                    — An element animates out of its trigger,
+                                    like a popover growing from the button that
+                                    opened it instead of from its own center
+                                    which is the default in CSS.
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section
+                        id="transitions-between-states"
+                        class="mb-24 scroll-mt-24 space-y-4"
+                    >
+                        <h2 class="text-gray-1200 mb-4 text-base font-bold">
+                            <a
+                                href="#transitions-between-states"
+                                class="no-underline"
+                                >Transitions Between States</a
+                            >
+                        </h2>
+                        <p
+                            class="text-gray-1200 mb-6 text-[15px] leading-relaxed"
+                        >
+                            Connecting one state, view, or element to another.
+                        </p>
+                        <ul class="m-0 list-none space-y-2.5 p-0">
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Crossfade
+                                    </span>
+                                    — One element fades out as another fades in,
+                                    in the same spot.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Continuity transition
+                                    </span>
+                                    — A change that keeps the user oriented by
+                                    visually connecting before and after. For
+                                    example, making the same rectangle bigger
+                                    and smaller.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Morph
+                                    </span>
+                                    — One shape smoothly turns into another
+                                    shape, e.g. Dynamic Island.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Shared element transition
+                                    </span>
+                                    — An element travels and transforms from one
+                                    position into another, like a thumbnail
+                                    expanding into a card.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Layout animation
+                                    </span>
+                                    — When an element’s size or position
+                                    changes, it animates to the new spot instead
+                                    of snapping.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Accordion / Collapse
+                                    </span>
+                                    — A section smoothly expands and collapses
+                                    its height to show or hide content.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Direction-aware transition
+                                    </span>
+                                    — Content slides one way going forward and
+                                    the opposite way going back, so navigation
+                                    has a sense of direction.
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section id="scroll" class="mb-24 scroll-mt-24 space-y-4">
+                        <h2 class="text-gray-1200 mb-4 text-base font-bold">
+                            <a href="#scroll" class="no-underline">Scroll</a>
+                        </h2>
+                        <p
+                            class="text-gray-1200 mb-6 text-[15px] leading-relaxed"
+                        >
+                            Motion tied to scrolling or navigating between
+                            views.
+                        </p>
+                        <ul class="m-0 list-none space-y-2.5 p-0">
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Scroll reveal
+                                    </span>
+                                    — Elements fade or slide into place as they
+                                    enter the viewport.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Scroll-driven animation
+                                    </span>
+                                    — An animation whose progress is tied
+                                    directly to scroll position.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Parallax
+                                    </span>
+                                    — Background and foreground move at
+                                    different speeds while scrolling, creating
+                                    depth.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Page transition
+                                    </span>
+                                    — An animation that plays when navigating
+                                    from one page or route to another.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >View transition
+                                    </span>
+                                    — The browser morphs between two states or
+                                    pages, connecting shared elements.
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section
+                        id="feedback-and-interaction"
+                        class="mb-24 scroll-mt-24 space-y-4"
+                    >
+                        <h2 class="text-gray-1200 mb-4 text-base font-bold">
+                            <a
+                                href="#feedback-and-interaction"
+                                class="no-underline"
+                                >Feedback & Interaction</a
+                            >
+                        </h2>
+                        <p
+                            class="text-gray-1200 mb-6 text-[15px] leading-relaxed"
+                        >
+                            Responding to the user’s actions.
+                        </p>
+                        <ul class="m-0 list-none space-y-2.5 p-0">
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Hover effect
+                                    </span>
+                                    — Visual change when the cursor moves over
+                                    an element.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Press / Tap feedback
+                                    </span>
+                                    — A subtle scale-down when an element is
+                                    clicked, so it feels physical.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Hold to confirm
+                                    </span>
+                                    — A progress effect that fills up while the
+                                    user holds a button.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Drag
+                                    </span>
+                                    — Moving an element by grabbing it, often
+                                    with momentum when released.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Drag to reorder
+                                    </span>
+                                    — Dragging items in a list to rearrange
+                                    them, while the others shift to make room.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Swipe to dismiss
+                                    </span>
+                                    — Dragging an element off-screen to close
+                                    it, like a drawer or toast.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Rubber-banding
+                                    </span>
+                                    — Resistance and snap-back when you drag
+                                    past a boundary (the iOS overscroll feel).
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Shake / Wiggle
+                                    </span>
+                                    — A quick side-to-side jitter signaling an
+                                    error or rejected input.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Ripple
+                                    </span>
+                                    — A circle expanding from the point of a
+                                    tap, confirming the press.
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section id="easing" class="mb-24 scroll-mt-24 space-y-4">
+                        <h2 class="text-gray-1200 mb-4 text-base font-bold">
+                            <a href="#easing" class="no-underline">Easing</a>
+                        </h2>
+                        <p
+                            class="text-gray-1200 mb-6 text-[15px] leading-relaxed"
+                        >
+                            How speed changes over an animation.
+                        </p>
+                        <ul class="m-0 list-none space-y-2.5 p-0">
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Easing
+                                    </span>
+                                    — The rate at which an animation speeds up
+                                    or slows down.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Ease-out
+                                    </span>
+                                    — Starts fast, ends slow. The default for
+                                    most UI and anything responding to the user.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Ease-in
+                                    </span>
+                                    — Starts slow, ends fast. Usually avoided;
+                                    can feel sluggish.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Ease-in-out
+                                    </span>
+                                    — Slow, fast, slow. Good for elements
+                                    already on screen moving from A to B.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Linear
+                                    </span>
+                                    — Constant speed. Avoid for UI; reserve for
+                                    spinners or marquees.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Cubic-bezier
+                                    </span>
+                                    — A custom easing curve you define for
+                                    precise control.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Asymmetric easing
+                                    </span>
+                                    — A curve that accelerates and decelerates
+                                    at different rates. Feels more alive than a
+                                    symmetric one.
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section
+                        id="spring-animations"
+                        class="mb-24 scroll-mt-24 space-y-4"
+                    >
+                        <h2 class="text-gray-1200 mb-4 text-base font-bold">
+                            <a href="#spring-animations" class="no-underline"
+                                >Spring Animations</a
+                            >
+                        </h2>
+                        <p
+                            class="text-gray-1200 mb-6 text-[15px] leading-relaxed"
+                        >
+                            Physics-based motion as an alternative to
+                            fixed-duration easing.
+                        </p>
+                        <ul class="m-0 list-none space-y-2.5 p-0">
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Spring
+                                    </span>
+                                    — Motion driven by physics (tension, mass,
+                                    damping) rather than a set duration.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Stiffness / Tension
+                                    </span>
+                                    — How strongly the spring pulls toward its
+                                    target. Higher feels snappier.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Damping
+                                    </span>
+                                    — How quickly a spring settles. Lower
+                                    damping means more bounce and oscillation.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Mass
+                                    </span>
+                                    — How heavy the animated element feels. More
+                                    mass makes it slower and more sluggish.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Bounce
+                                    </span>
+                                    — A spring that overshoots and settles,
+                                    adding playfulness.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Perceptual duration
+                                    </span>
+                                    — How long a spring feels finished, even
+                                    though it keeps micro-settling underneath.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Momentum
+                                    </span>
+                                    — Motion that carries velocity, especially
+                                    after a drag or interruption.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Velocity
+                                    </span>
+                                    — How fast and in which direction an element
+                                    is moving. A spring carries it into the next
+                                    animation when interrupted, so a flicked
+                                    element keeps its speed.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Interruptible animation
+                                    </span>
+                                    — An animation that can be smoothly
+                                    redirected mid-flight instead of finishing
+                                    first.
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section
+                        id="looping-and-ambient-motion"
+                        class="mb-24 scroll-mt-24 space-y-4"
+                    >
+                        <h2 class="text-gray-1200 mb-4 text-base font-bold">
+                            <a
+                                href="#looping-and-ambient-motion"
+                                class="no-underline"
+                                >Looping & Ambient Motion</a
+                            >
+                        </h2>
+                        <p
+                            class="text-gray-1200 mb-6 text-[15px] leading-relaxed"
+                        >
+                            Animations that run on their own.
+                        </p>
+                        <ul class="m-0 list-none space-y-2.5 p-0">
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Marquee
+                                    </span>
+                                    — Text or content that scrolls continuously
+                                    in a loop.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Loop
+                                    </span>
+                                    — An animation that repeats, a set number of
+                                    times or infinitely.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Alternate (yoyo)
+                                    </span>
+                                    — A loop that plays forward then reverses
+                                    each iteration, instead of jumping back to
+                                    the start.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Orbit
+                                    </span>
+                                    — An element circling around another in a
+                                    continuous path.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Pulse
+                                    </span>
+                                    — A gentle repeating scale or opacity change
+                                    to draw attention.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Float
+                                    </span>
+                                    — A gentle, continuous up-and-down drift
+                                    that makes a static element feel alive and
+                                    weightless.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Idle animation
+                                    </span>
+                                    — Subtle motion that plays while an element
+                                    is just sitting there, waiting to be
+                                    interacted with.
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section
+                        id="polish-and-effects"
+                        class="mb-24 scroll-mt-24 space-y-4"
+                    >
+                        <h2 class="text-gray-1200 mb-4 text-base font-bold">
+                            <a href="#polish-and-effects" class="no-underline"
+                                >Polish & Effects</a
+                            >
+                        </h2>
+                        <p
+                            class="text-gray-1200 mb-6 text-[15px] leading-relaxed"
+                        >
+                            The small touches that separate good from great.
+                        </p>
+                        <ul class="m-0 list-none space-y-2.5 p-0">
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Blur
+                                    </span>
+                                    — A blur filter used to soften an element or
+                                    mask tiny imperfections.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Clip-path
+                                    </span>
+                                    — Clipping an element to a shape, used for
+                                    reveals, masks, and before/after sliders.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Mask
+                                    </span>
+                                    — Hiding or revealing parts of an element
+                                    using a shape or gradient — like clip-path,
+                                    but with soft, fadeable edges.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Before / after slider
+                                    </span>
+                                    — A draggable divider that wipes between two
+                                    overlaid images to compare them.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Line drawing
+                                    </span>
+                                    — An SVG path that draws itself in, like an
+                                    invisible pen tracing it.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Text morph
+                                    </span>
+                                    — Text that animates character by character
+                                    when it changes, drawing attention to the
+                                    new value.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Skeleton / Shimmer
+                                    </span>
+                                    — A placeholder with a moving sheen shown
+                                    while content loads.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Number ticker
+                                    </span>
+                                    — Digits rolling or counting up to a value.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Tabular numbers
+                                    </span>
+                                    — Fixed-width digits so numbers don’t shift
+                                    around as they change. Essential for
+                                    tickers, timers, and counters.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Typewriter
+                                    </span>
+                                    — Text appearing one character at a time, as
+                                    if being typed.
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section
+                        id="performance"
+                        class="mb-24 scroll-mt-24 space-y-4"
+                    >
+                        <h2 class="text-gray-1200 mb-4 text-base font-bold">
+                            <a href="#performance" class="no-underline"
+                                >Performance</a
+                            >
+                        </h2>
+                        <p
+                            class="text-gray-1200 mb-6 text-[15px] leading-relaxed"
+                        >
+                            What keeps motion smooth instead of stuttering.
+                        </p>
+                        <ul class="m-0 list-none space-y-2.5 p-0">
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Frame rate (FPS)
+                                    </span>
+                                    — Frames drawn per second. 60fps is the
+                                    baseline for smooth motion; 120fps on newer
+                                    displays.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Jank
+                                    </span>
+                                    — Visible stutter when the browser drops
+                                    frames because it can't keep up with the
+                                    animation.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Dropped frame
+                                    </span>
+                                    — A frame the browser missed its deadline to
+                                    draw, causing a tiny hitch in motion.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Compositing
+                                    </span>
+                                    — Letting the GPU move or fade an element on
+                                    its own layer without redoing layout or
+                                    paint.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >will-change
+                                    </span>
+                                    — A CSS hint that an element is about to
+                                    animate, so the browser can promote it to
+                                    its own layer ahead of time.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Layout thrashing
+                                    </span>
+                                    — Animating properties like width, height,
+                                    top, or left that force the browser to
+                                    recalculate layout every frame, causing
+                                    jank.
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section
+                        id="principles-to-know"
+                        class="mb-24 scroll-mt-24 space-y-4"
+                    >
+                        <h2 class="text-gray-1200 mb-4 text-base font-bold">
+                            <a href="#principles-to-know" class="no-underline"
+                                >Principles to Know</a
+                            >
+                        </h2>
+                        <p
+                            class="text-gray-1200 mb-6 text-[15px] leading-relaxed"
+                        >
+                            Concepts that guide when and how to animate.
+                        </p>
+                        <ul class="m-0 list-none space-y-2.5 p-0">
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Purposeful animation
+                                    </span>
+                                    — Motion should serve a function — orient,
+                                    give feedback, show relationships — not just
+                                    decorate.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Anticipation
+                                    </span>
+                                    — A small wind-up in the opposite direction
+                                    before a move, hinting at what's about to
+                                    happen.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Follow-through
+                                    </span>
+                                    — Parts of an element keep moving and settle
+                                    slightly after the main motion stops, adding
+                                    weight.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Squash & stretch
+                                    </span>
+                                    — Deforming an element as it moves to convey
+                                    weight, speed, and flexibility.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Perceived performance
+                                    </span>
+                                    — The right animation makes an interface
+                                    feel faster, even when it isn’t.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Frequency of use
+                                    </span>
+                                    — The more often a user sees an animation,
+                                    the shorter and subtler it should be.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Spatial consistency
+                                    </span>
+                                    — Animating so an element keeps its identity
+                                    and position across states, so users never
+                                    lose track of where things went.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Hardware acceleration
+                                    </span>
+                                    — Animating transform and opacity lets the
+                                    GPU keep motion smooth.
+                                </p>
+                            </li>
+                            <li class="flex text-[15px] leading-relaxed">
+                                <p class="text-gray-1200 m-0">
+                                    <span class="text-gray-1200 font-bold"
+                                        >Reduced motion
+                                    </span>
+                                    — Respecting the user’s
+                                    prefers-reduced-motion setting by toning
+                                    down or removing motion.
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
