@@ -11,6 +11,7 @@
   --color-border: #d0d7de;
   --color-border-muted: hsla(210, 18%, 87%, 1);
   --color-code-bg: rgba(175, 184, 193, 0.2);
+  --color-bg-code: var(--color-block-bg);
   --color-block-bg: #f6f8fa;
   --color-link: #0969da;
   --color-blockquote-border: #d0d7de;
@@ -34,12 +35,30 @@
 }
 
 body {
-    background-color: var(--color-bg);
+  margin: 0;
+  background-color: var(--color-bg);
 }
 
 /* ==========================================
    2. Core Typography & Layout
    ========================================== */
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+  .two-column {
+    grid-template-columns: 3fr 1fr;
+  }
+}
+
+.two-column > p {
+  margin-bottom: 0;
+}
+
 .markdown-body {
   box-sizing: border-box;
   min-width: 200px;
@@ -66,6 +85,19 @@ body {
   box-sizing: border-box;
 }
 
+.wiki-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1em;
+  margin-bottom: 16px;
+}
+
+.wiki-nav p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 /* ==========================================
    3. Headings & Divider Lines
    ========================================== */
@@ -86,6 +118,10 @@ body {
   font-size: 2em;
   padding-bottom: 0.3em;
   border-bottom: 1px solid var(--color-border);
+}
+
+.markdown-body h1.wiki-title {
+  font-size: 2.5rem;
 }
 
 .markdown-body h2 {
@@ -123,6 +159,10 @@ body {
 
 .markdown-body a:hover {
   text-decoration: underline;
+}
+
+.markdown-body a strong {
+  color: inherit;
 }
 
 .markdown-body strong {
@@ -232,4 +272,28 @@ body {
   max-width: 100%;
   box-sizing: content-box;
   background-color: var(--color-bg);
+}
+
+/* ==========================================
+   9. Page Footer (Sources & Related)
+   ========================================== */
+footer.markdown-body {
+  margin-bottom: 48px;
+  border-radius: 16px;
+  background-color: var(--color-bg-code);
+  font-size: 0.75rem;
+}
+
+.wiki-footer > p:last-child {
+  margin-bottom: 0;
+}
+
+footer.markdown-body h4 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-size: 1em;
+}
+
+footer.markdown-body h4:not(:first-child) {
+  margin-top: 1.5em;
 }

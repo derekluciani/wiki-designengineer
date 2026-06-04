@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ephemeral Design — Design Engineer Wiki</title>
+  <link href="./styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <article class="markdown-body">
+    <nav class="wiki-nav">
+      <p><a href="../index.html">← Return to Index</a></p>
+      <p><a href="./people.html">People →</a></p>
+    </nav>
+
+    <h1>Ephemeral Design</h1>
+    <p><em>Ricky Zhang's argument that design files should return to being disposable drafts, leaving the design system as the only durable asset and code as the single source of truth.</em></p>
+
+    <h2>The problem of two truths</h2>
+    <p>Product teams have long maintained two mirror-image sources of truth — a "truth of intent" in Figma and a "truth of implementation" in code.<sup><a href="#s3">3</a></sup> This made sense when code was expensive and pixels were cheap, so teams validated in the cheaper medium first.<sup><a href="#s3">3</a></sup> But design files are inherently a <em>simulator</em>: they don't account for network latency, data complexity, rendering behavior, or accessibility tooling. Code is the only artifact that contains the full reality of the system.<sup><a href="#s3">3</a></sup></p>
+
+    <h2>The cost of keeping two truths aligned</h2>
+    <ul>
+      <li><strong>Busywork.</strong> Updating Figma after a feature ships is documentation theater that creates no user value.<sup><a href="#s3">3</a></sup></li>
+      <li><strong>Translation loss.</strong> Polished mocks hide implementation complexity and suppress engineering objections until midstream.<sup><a href="#s3">3</a></sup></li>
+      <li><strong>Inevitable drift.</strong> A Shopify internal audit found 14% of implementations had drifted from a robust design system within a year.<sup><a href="#s3">3</a></sup></li>
+      <li><strong>Over-engineered Figma.</strong> Tokens, variables, and modes shifted cognitive load onto designers, turning them into "Figma admins" maintaining fragile logic with weak refactoring tooling.<sup><a href="#s3">3</a></sup></li>
+      <li><strong>Zombie logic.</strong> One team had 300+ Figma components vs ~120 in code — carefully built variants nobody used.<sup><a href="#s3">3</a></sup></li>
+    </ul>
+
+    <h2>The paradigm</h2>
+    <p>As AI drives the cost of code toward zero, the case for high-fidelity simulation collapses. Ephemeral Design proposes:<sup><a href="#s3">3</a></sup></p>
+    <ul>
+      <li><strong>Figma as a whiteboard</strong> — for divergent thinking and clarifying logic, not pixel-perfect replicas.</li>
+      <li><strong>Archive after launch</strong> — once a feature ships, reference the live product (code), not a months-old mock.</li>
+      <li><strong>A lean design system is the only durable asset</strong> — kept tightly synced to code: if it isn't in code, it shouldn't be in Figma.</li>
+      <li><strong>Code previews become the shared language</strong> — decisions are made against the real product experience.</li>
+    </ul>
+
+    <h2>Boundaries (the source's own caveat)</h2>
+    <p>Zhang notes Ephemeral Design works best today for teams strong in product logic, fast-moving, with a high talent bar. Where visual expression <em>is</em> the product — marketing sites, brand-heavy experiences — abandoning traditional deliverables needs more experimentation.<sup><a href="#s3">3</a></sup></p>
+
+    <h2>Why it matters for the role</h2>
+    <p>Ephemeral Design dissolves the handoff and makes design and engineering parallel co-creation in a code-centered environment — exactly the territory the <a href="./the-design-engineer-role.html">design engineer</a> occupies. It pairs naturally with <a href="./verification-asymmetry.html">Verification Asymmetry</a> (verify in code) and the <a href="./design-engineering-in-the-age-of-ai.html">AI shift</a> (vibe coding to adjust real product directly).<sup><a href="#s3">3</a></sup></p>
+
+  </article>
+
+  <footer class="markdown-body">
+
+    <h4>Sources</h4>
+    <ol>
+      <li id="s3"><a href="../raw/Ephemeral%20Design%20Process.txt">Ricky Zhang — Ephemeral Design Process (blog.rickyzhang.me)</a></li>
+    </ol>
+
+
+    <h4>Related pages</h4>
+    <ul>
+      <li><a href="./verification-asymmetry.html">Verification Asymmetry</a></li>
+      <li><a href="./design-systems.html">Design Systems</a></li>
+      <li><a href="./design-engineering-in-the-age-of-ai.html">Design Engineering in the Age of AI</a></li>
+      <li><a href="./history-and-re-emergence.html">History &amp; Re-emergence</a></li>
+      <li><a href="./people.html">People</a> — Ricky Zhang</li>
+    </ul>
+
+  </footer>
+
+</body>
+</html>

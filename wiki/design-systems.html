@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Systems — Design Engineer Wiki</title>
+  <link href="./styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <article class="markdown-body">
+    <nav class="wiki-nav">
+      <p><a href="../index.html">← Return to Index</a></p>
+      <p><a href="./verification-asymmetry.html">Verification Asymmetry →</a></p>
+    </nav>
+
+    <h1>Design Systems</h1>
+    <p><em>Building and governing the "single source of truth" for components is the design engineer's highest-leverage contribution — and the mechanism behind enterprise impact.</em></p>
+
+    <h2>More than a component library</h2>
+    <p>A design system is a single source of truth that ensures consistency across a growing suite of products — not merely a library of buttons.<sup><a href="#s2">2</a></sup> Design engineers apply <strong>atomic design</strong> thinking, decomposing interfaces into atoms, molecules, and organisms that assemble into full screens, so a change to a base component ripples correctly everywhere.<sup><a href="#s2">2</a></sup></p>
+
+    <h2>Tokens and state-driven UI</h2>
+    <p>Color, spacing, and typography are abstracted into <strong>design tokens</strong>; design engineers manage these and ensure they map correctly to implementation code, defining variants and component properties that mirror real code states (hover, disabled, active, error).<sup><a href="#s2">2</a></sup> At GitHub, Staff Design Engineers set these standards and drive consistency as the company grows — "systems thinking" about long-term maintainability.<sup><a href="#s2">2</a></sup></p>
+
+    <h2>Perspective: keep the system lean</h2>
+    <p>The Ephemeral Design argument pushes back on over-built systems: the design system should be the <em>only</em> durable design asset, kept on a "diet" and tightly synced to code — if a component or behavior doesn't exist in code, it shouldn't exist in Figma.<sup><a href="#s3">3</a></sup> Drift is otherwise inevitable (Shopify found 14% drift within a year even with a robust system).<sup><a href="#s3">3</a></sup> This tempers the "more tokens, more variants" tendency with a discipline of restraint.</p>
+
+    <h2>Why it drives enterprise value</h2>
+    <p>Because a system makes quality repeatable, it is the lever by which one design engineer affects an entire org's output — the core of the <a href="./enterprise-impact.html">enterprise impact</a> case.<sup><a href="#s8">8</a></sup><sup><a href="#s2">2</a></sup></p>
+
+  </article>
+
+  <footer class="markdown-body">
+
+    <h4>Sources</h4>
+    <ol>
+      <li id="s2"><a href="../raw/Deep%20Research%20-%20Design%20Engineer%20Role%20Roadmap.md">Deep Research — The Evolution and Professional Standards of Design Engineering</a></li>
+      <li id="s3"><a href="../raw/Ephemeral%20Design%20Process.txt">Ricky Zhang — Ephemeral Design Process</a></li>
+      <li id="s8"><a href="../raw/Why%20Design%20Engineers%20Command%20a%20Premium%20Price.txt">Why Design Engineers Command a Premium Price</a></li>
+    </ol>
+
+
+    <h4>Related pages</h4>
+    <ul>
+      <li><a href="./craft-and-competencies.html">Craft &amp; Competencies</a></li>
+      <li><a href="./ephemeral-design.html">Ephemeral Design</a></li>
+      <li><a href="./enterprise-impact.html">Enterprise Impact</a></li>
+      <li><a href="./role-comparisons.html">Role Comparisons</a> — vs. Design System Engineer</li>
+      <li><a href="./organizations.html">Organizations</a></li>
+    </ul>
+
+  </footer>
+
+</body>
+</html>

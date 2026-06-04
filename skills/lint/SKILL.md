@@ -7,4 +7,11 @@ Use this skill as an instruction set. Follow the workflow in order.
 
 ## Workflow
 
-Periodically, ask the LLM to health-check the wiki. Look for: contradictions between pages, stale claims that newer sources have superseded, orphan pages with no inbound links, important concepts mentioned but lacking their own page, missing cross-references, data gaps that could be filled with a web search. The LLM is good at suggesting new questions to investigate and new sources to look for. This keeps the wiki healthy as it grows.
+1. The user will periodically ask the LLM to run a content quality health-check. Look for:
+  - contradictions between pages
+  - stale claims that newer sources have superseded
+  - orphan pages with no inbound links
+  - important concepts mentioned but lacking their own page
+  - missing cross-references
+  - data gaps that could be filled with a web search.
+2. Report back with changes to make, but only if necessary.
